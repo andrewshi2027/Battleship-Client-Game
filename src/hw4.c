@@ -17,19 +17,6 @@ typedef struct {
     char **grid;
 } Board;
 
-// typedef struct {
-//     int id;
-//     int ships_remaining;
-//     Board board;
-// } Player;
-
-// typedef struct {
-//     int type;
-//     int rotation;
-//     int column;
-//     int row;
-// } Piece;
-
 Board *create_board(int width, int height) {
     Board *board = (Board*)malloc(sizeof(Board));
     board->width = width;
@@ -498,8 +485,6 @@ int main() {
     char p2_buffer[BUFFER_SIZE] = {0};
     int opt = 1;
 
-    Board *game_board = NULL;
-
     // Create socket for Player 1
     if ((p1_listen_fd = socket(AF_INET, SOCK_STREAM, 0)) == 0) {
         perror("socket failed for Player 1");
@@ -577,6 +562,9 @@ int main() {
     }
     //_____________________________GAME_______________________________________________________________________
 
+    int **p1_board;
+    int **p2_board;
+
     //Receive message from Player 1
     while (1) {
         memset(p1_buffer, 0, BUFFER_SIZE);
@@ -584,6 +572,7 @@ int main() {
         int width, height;
 
         int p1_nbytes = read(p1_conn_fd, p1_buffer, BUFFER_SIZE);
+
         if (p1_nbytes <= 0) {
             perror("[Server] read() failed for Player 1.");
             exit(EXIT_FAILURE);
@@ -591,43 +580,57 @@ int main() {
 
         //Forfeit
         if (strcmp(p1_buffer, "F") == 0) {
-            printf("Player 1 Forfeited\n");
+            printf("[Server] Player 1 forfeited\n");
             send(p1_conn_fd, "H 0", 3, 0); //Halt
             send(p2_conn_fd, "H 1", 3, 0); //Halt
             close(p1_conn_fd);
             close(p2_conn_fd);
             close(p1_listen_fd);
             close(p2_listen_fd);
-
+            return 0;
         }
 
-        if (sscanf(p1_buffer, "B %d %d", width, height) == 2) {
-            game_board = create_board(width, height);
-            if(!game_board) {
-                perror("Failure to create board");
-            }
-            else {
-                perror("[Server] invalid board dimensions");             
-            }
+        if (p1_buffer[0] != "B") {
+            send(p1_conn_fd, "E 100", 5, 0);
+        }
+        else if (sscanf(p1_buffer, "B %d %d", width, height) != 2) {
+            send(p1_conn_fd, "E 200", 5, 0);
+        }
+        else if (width >= 10 && height >= 10) {
+            p1_board = create_board(width, height);
+            p1_board = begin(p1_board, width, height);
+            p2_board = create_board(width, height);
+            p2_board = begin(p2_board, width, height);
+            send(p1_conn_fd, "A", 1, 0); //Send Acknowledgement
+            break;
+        }
+        //Invalid Dimensions
+        else {
+            send(p1_conn_fd, "E 200", 5, 0);
         }
     }
 
     //Receive message from Player 2
     while (1) {
-        memset(buffer, 0, BUFFER_SIZE);
-        int nbytes2 = read(p2_conn_fd, buffer, BUFFER_SIZE);
-        if (nbytes2 <= 0) {
+        memset(p2_buffer, 0, BUFFER_SIZE);
+        int p2_nbytes = read(p2_conn_fd, p2_buffer, BUFFER_SIZE);
+        if (p2_nbytes <= 0) {
             perror("[Server] read() failed for Player 2.");
             exit(EXIT_FAILURE);
         }
 
-        buffer[strlen(buffer)-1] = '\0';
-        if (strcmp(buffer, "B") == 0) {
-            printf("[Server] Player 2 has joined the game!");
+        //Forfeit
+        if (strcmp(p2_buffer, "F") == 0) {
+            printf("Player 2 Forfeited\n");
+            send(p2_conn_fd, "H 0", 4, 0); //Halt
+            send(p1_conn_fd, "H 1", 4, 0); //Halt
+            close(p1_conn_fd);
+            close(p2_conn_fd);
+            close(p1_listen_fd);
+            close(p2_listen_fd);
+            return 0;
         }
-        else {
-            printf("[Server] Invalid join message from Player 2");
-        }
+
             
     }
 
