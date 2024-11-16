@@ -502,18 +502,10 @@ int main() {
         perror("setsockopt(server_fd, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt))");
         exit(EXIT_FAILURE);
     }
-    if (setsockopt(p1_listen_fd, SOL_SOCKET, SO_REUSEPORT, &opt, sizeof(opt))) {
-        perror("setsockopt(server_fd, SOL_SOCKET, SO_REUSEPORT, &opt, sizeof(opt))");
-        exit(EXIT_FAILURE);
-    }
 
     // Set socket options for Player 2
     if (setsockopt(p2_listen_fd, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt))) {
         perror("setsockopt(server_fd, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt))");
-        exit(EXIT_FAILURE);
-    }
-    if (setsockopt(p2_listen_fd, SOL_SOCKET, SO_REUSEPORT, &opt, sizeof(opt))) {
-        perror("setsockopt(server_fd, SOL_SOCKET, SO_REUSEPORT, &opt, sizeof(opt))");
         exit(EXIT_FAILURE);
     }
 
@@ -560,8 +552,10 @@ int main() {
         perror("[Server] accept() failed for Player 2.");
         exit(EXIT_FAILURE);
     }
-    //_____________________________GAME_______________________________________________________________________
-
+    //_______________________________________________________________________________________________________________________
+    //_______________________________________________________________________________________________________________________
+    //_______________________________________________________GAME____________________________________________________________
+    //_______________________________________________________________________________________________________________________
     int **p1_board;
     int **p2_board;
 
@@ -604,7 +598,7 @@ int main() {
             send(p1_conn_fd, "A", 1, 0); //Send Acknowledgement
             break;
         }
-        //Invalid Dimensions
+        //Invalid Dimensions (too small)
         else {
             send(p1_conn_fd, "E 200", 5, 0);
         }
@@ -612,8 +606,15 @@ int main() {
 
     //Receive message from Player 2
     while (1) {
+        int temp;
+
         memset(p2_buffer, 0, BUFFER_SIZE);
         int p2_nbytes = read(p2_conn_fd, p2_buffer, BUFFER_SIZE);
+        if (p2_nbytes <= 0) {
+            perror("[Server] read() failed for Player 2.");
+            exit(EXIT_FAILURE);
+        }
+
         if (p2_nbytes <= 0) {
             perror("[Server] read() failed for Player 2.");
             exit(EXIT_FAILURE);
@@ -629,6 +630,17 @@ int main() {
             close(p1_listen_fd);
             close(p2_listen_fd);
             return 0;
+        }
+
+        if (p2_buffer[0] != "B") {
+            send(p1_conn_fd, "E 100", 5, 0);
+        }
+        else if (sscanf(p2_buffer, "%d", &temp) == 1) {
+            send(p2_conn_fd, "E 200", 5, 0);
+        }
+        else {
+            send(p1_conn_fd, "A", 1, 0); //Send Acknowledgement
+            break;
         }
 
             
