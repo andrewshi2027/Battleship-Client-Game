@@ -18,7 +18,7 @@ typedef struct {
 } Board;
 
 Board *create_board(int width, int height) {
-    Board *board = (Board*)malloc(sizeof(Board));
+    Board *board = malloc(sizeof(Board));
     board->width = width;
     board->height = height;
 
@@ -34,6 +34,7 @@ void display_board(Board *board, int width, int height) {
         for (int j = 0; j < width; j++) {
             printf("%d ", board->grid[i][j]);
         }
+        printf("\n");
     }
 }
 
@@ -548,7 +549,7 @@ int main() {
     }
 
     // Accept incoming connection for Player 2
-    if ((p2_conn_fd = accept(p1_listen_fd, (struct sockaddr *)&p2_address, (socklen_t *)&p2_addrlen)) < 0) {
+    if ((p2_conn_fd = accept(p2_listen_fd, (struct sockaddr *)&p2_address, (socklen_t *)&p2_addrlen)) < 0) {
         perror("[Server] accept() failed for Player 2.");
         exit(EXIT_FAILURE);
     }
@@ -587,10 +588,11 @@ int main() {
         if (p1_buffer[0] != 'B') {
             send(p1_conn_fd, "E 100", 5, 0);
         }
-        else if (sscanf(p1_buffer, "B %d %d", width, height) != 2) {
+        else if (sscanf(p1_buffer, "B %d %d", &width, &height) != 2) {
             send(p1_conn_fd, "E 200", 5, 0);
         }
         else if (width >= 10 && height >= 10) {
+            printf("The width is %d the height is %d", width, height);
             p1_board = create_board(width, height);
             p1_board = begin(p1_board, width, height);
             p2_board = create_board(width, height);
