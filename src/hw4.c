@@ -592,7 +592,6 @@ int main() {
             send(p1_conn_fd, "E 200", 5, 0);
         }
         else if (width >= 10 && height >= 10) {
-            printf("The width is %d the height is %d", width, height);
             p1_board = create_board(width, height);
             p1_board = begin(p1_board, width, height);
             p2_board = create_board(width, height);
@@ -636,13 +635,14 @@ int main() {
 
         if (p2_buffer[0] != 'B') {
             send(p1_conn_fd, "E 100", 5, 0);
+            continue;
         }
-        else if (sscanf(p2_buffer, "%d", &temp) == 1) {
-            send(p2_conn_fd, "E 200", 5, 0);
-        }
-        else {
+        else if (p2_buffer[0] == 'B' && strlen(p2_buffer) == 1) {
             send(p1_conn_fd, "A", 1, 0); //Send Acknowledgement
             break;
+        }
+        else {
+            send(p2_conn_fd, "E 200", 5, 0);
         }
 
             
