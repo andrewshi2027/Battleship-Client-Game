@@ -638,6 +638,7 @@ int main() {
             continue;
         }
         else if (p2_buffer[0] == 'B' && strlen(p2_buffer) == 1) {
+            printf("Hello");
             send(p1_conn_fd, "A", 1, 0); //Send Acknowledgement
             break;
         }
@@ -645,8 +646,9 @@ int main() {
             send(p2_conn_fd, "E 200", 5, 0);
         }
 
-            
     }
+
+    
 
     printf("[Server] Shutting down.\n");
     close(p1_conn_fd);
