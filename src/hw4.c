@@ -14,7 +14,7 @@
 typedef struct {
     int width;
     int height;
-    char **grid;
+    int **grid;
 } Board;
 
 Board *create_board(int width, int height) {
@@ -22,9 +22,9 @@ Board *create_board(int width, int height) {
     board->width = width;
     board->height = height;
 
-    board->grid= (char**)malloc(height * sizeof(char*));
+    board->grid= (int**)malloc(height * sizeof(int*));
     for (int i = 0; i < height; i++) {
-        board->grid[i] = (char *)malloc(width * sizeof(char));
+        board->grid[i] = (int *)malloc(width * sizeof(int));
     }
     return board;
 }
@@ -556,8 +556,8 @@ int main() {
     //_______________________________________________________________________________________________________________________
     //_______________________________________________________GAME____________________________________________________________
     //_______________________________________________________________________________________________________________________
-    int **p1_board;
-    int **p2_board;
+    Board *p1_board;
+    Board *p2_board;
 
     //Receive message from Player 1
     while (1) {
@@ -584,7 +584,7 @@ int main() {
             return 0;
         }
 
-        if (p1_buffer[0] != "B") {
+        if (p1_buffer[0] != 'B') {
             send(p1_conn_fd, "E 100", 5, 0);
         }
         else if (sscanf(p1_buffer, "B %d %d", width, height) != 2) {
@@ -632,7 +632,7 @@ int main() {
             return 0;
         }
 
-        if (p2_buffer[0] != "B") {
+        if (p2_buffer[0] != 'B') {
             send(p1_conn_fd, "E 100", 5, 0);
         }
         else if (sscanf(p2_buffer, "%d", &temp) == 1) {
