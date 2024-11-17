@@ -101,8 +101,6 @@ int initialize(Board *board, char* buffer, int width, int height) {
             return 301;
         }
 
-        
-    
         switch (piece_type) {
             case 1: //Shape 1
                 if (piece_rotation == 1 || piece_rotation == 2 || piece_rotation == 3 || piece_rotation == 4) {
@@ -495,7 +493,6 @@ int ships_left (Board *board, int width, int height) {
 }
 
 //Query
-
 //Forfeit
 //Error
 //Halt
@@ -589,7 +586,8 @@ int main() {
         memset(p1_buffer, 0, BUFFER_SIZE);
         memset(p2_buffer, 0, BUFFER_SIZE);
         int width, height;
-
+        char space; 
+        
         int p1_nbytes = read(p1_conn_fd, p1_buffer, BUFFER_SIZE);
 
         if (p1_nbytes <= 0) {
@@ -612,7 +610,7 @@ int main() {
         if (p1_buffer[0] != 'B') {
             send(p1_conn_fd, "E 100", 5, 0);
         }
-        else if (sscanf(p1_buffer, "B %d %d", &width, &height) != 2) {
+        else if (sscanf(p1_buffer, "B %d %d %c", &width, &height, &space) != 2) {
             send(p1_conn_fd, "E 200", 5, 0);
         }
         else if (width >= 10 && height >= 10) {
