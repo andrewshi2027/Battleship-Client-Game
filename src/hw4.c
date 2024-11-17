@@ -98,6 +98,25 @@ int initialize(Board *board, char* buffer, int width, int height) {
 
     int ship = 1;
 
+    int temp = pieces_index;
+    for (int i = 0; i < pieces_index; i += 4) {
+        int piece_type = pieces[i];
+
+        if (piece_type < 1 || piece_type > 7) {
+            clear_board(board, width, height);
+            return 300;
+        }
+    }
+    for (int i = 0; i < pieces_index; i += 4) {
+
+        int piece_rotation = pieces[i + 1];
+
+        if (piece_rotation < 1 || piece_rotation > 4) {
+            clear_board(board, width, height);
+            return 301;
+        }
+    }
+
     for (int i = 0; i < pieces_index; i += 4) {
         int piece_type = pieces[i];
         int piece_rotation = pieces[i + 1];
