@@ -45,7 +45,7 @@ Board *begin(Board *board, int width, int height) {
             board->grid[i][j] = 0;
         }
     }
-    display_board(board, width, height);
+    
     return board;
 }
 
@@ -70,8 +70,8 @@ int initialize(Board *board, char* buffer, int width, int height) {
     int space = 0;
     int pieces[20]; 
     int buffer_index = 2;
-
-    while (sscanf(&buffer[buffer_index], "%d ", &pieces[pieces_index], &space) == 1) {
+    
+    while (sscanf(&buffer[buffer_index], "%d%n", &pieces[pieces_index], &space) == 1) {
         pieces_index++;
         buffer_index += space; 
         if (pieces_index >= 20) {break;}
@@ -79,7 +79,11 @@ int initialize(Board *board, char* buffer, int width, int height) {
 
     if (pieces_index < 20) {
         printf("Error");
-        return 302;
+        return 201;
+    }
+
+    for (int i = 0; i < pieces_index; i++) {
+        printf("%d", pieces[i]);
     }
 
     for (int i = 0; i < pieces_index; i += 4) {
@@ -95,6 +99,8 @@ int initialize(Board *board, char* buffer, int width, int height) {
         if (piece_rotation < 1 || piece_rotation > 4) {
             return 301;
         }
+
+        
     
         switch (piece_type) {
             case 1: //Shape 1
@@ -114,7 +120,11 @@ int initialize(Board *board, char* buffer, int width, int height) {
                     if (board->grid[piece_row + 1][piece_column + 1] == 1) {return 303;} 
                     if (is_within_board(board, piece_row + 1, piece_column + 1) == 1) {board->grid[piece_row + 1][piece_column + 1] = 1;}           
                     else {return 302;}
+
+                    display_board(board, width, height);
+                    printf("\n");
                 }
+                break;
                 
             case 2: //Shape 2
                 if (piece_rotation == 1 || piece_rotation == 3) {
@@ -152,6 +162,7 @@ int initialize(Board *board, char* buffer, int width, int height) {
                     if (is_within_board(board, piece_row, piece_column + 3) == 1) {board->grid[piece_row][piece_column + 3] = 1;}           
                     else {return 302;}
                 }
+                break;
 
             case 3: //Shape 3
                 if (piece_rotation == 1 || piece_rotation == 3) {
@@ -189,6 +200,7 @@ int initialize(Board *board, char* buffer, int width, int height) {
                     if (is_within_board(board, piece_row + 2, piece_column + 1) == 1) {board->grid[piece_row + 2][piece_column + 1] = 1;}           
                     else {return 302;}
                 }
+                break;
 
             case 4: //Shape 4
                 if (piece_rotation == 1) {
@@ -262,6 +274,7 @@ int initialize(Board *board, char* buffer, int width, int height) {
                     if (is_within_board(board, piece_row - 1, piece_column + 2) == 1) {board->grid[piece_row - 1][piece_column + 2] = 1;}           
                     else {return 302;}
                 }
+                break;
 
             case 5: //Shape 5
                 if (piece_rotation == 1 || piece_rotation == 3) {
@@ -299,6 +312,7 @@ int initialize(Board *board, char* buffer, int width, int height) {
                     if (is_within_board(board, piece_row - 1, piece_column + 0) == 1) {board->grid[piece_row - 1][piece_column + 0] = 1;}           
                     else {return 302;}
                 }
+                break;
 
             case 6: //Shape 6
                 if (piece_rotation == 1) {
@@ -372,6 +386,7 @@ int initialize(Board *board, char* buffer, int width, int height) {
                     if (is_within_board(board, piece_row + 1, piece_column + 2) == 1) {board->grid[piece_row + 1][piece_column + 2] = 1;}           
                     else {return 302;}
                 }
+                break;
 
             case 7: //Shape 7
                 if (piece_rotation == 1) {
@@ -445,6 +460,7 @@ int initialize(Board *board, char* buffer, int width, int height) {
                     if (is_within_board(board, piece_row + 1, piece_column + 1) == 1) {board->grid[piece_row + 1][piece_column + 1] = 1;}           
                     else {return 302;}
                 }
+                break;
         }
     }
 }
@@ -655,7 +671,7 @@ int main() {
         }
     }
 
-    //Player 1 Initialize
+    //Player 1 Initializing
     while (1) {
         memset(p1_buffer, 0, BUFFER_SIZE);
 
@@ -678,7 +694,7 @@ int main() {
             continue;
         }
         else if (p1_buffer[0] == 'I') {
-            printf("[Server] Player 1 Initializing");
+            printf("[Server] Player 1 Initializing\n");
             int error = initialize(p1_board, p1_buffer, p1_board->width, p1_board->height);
             if (error == 302) {
                 send(p1_conn_fd, "E 302", 5, 0);
@@ -686,8 +702,11 @@ int main() {
             else if (error == 303) {
                 send(p1_conn_fd, "E 303", 5, 0);
             }
-            else {
-                send(p1_conn_fd, "E 201", 5, 0);
+            else if(//Logic for param){
+                //send(p1_conn_fd, "E 201", 5, 0);
+            }
+            else{
+                send(p1_conn_fd, "A", 1, 0);
             }
         }
     }
