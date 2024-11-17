@@ -773,16 +773,48 @@ int main() {
         }
     }
 
-    // //Player 1 Shoot
-    // while (1) {
-    //     memset(p1_buffer, 0, BUFFER_SIZE);
-    //     int p1_nbytes = read(p1_conn_fd, p1_buffer, BUFFER_SIZE);
+    //Player 1 Shoot
+    while (1) {
+        memset(p1_buffer, 0, BUFFER_SIZE);
+        int p1_nbytes = read(p1_conn_fd, p1_buffer, BUFFER_SIZE);
 
-    //     if(ships_left(p1_board, p1_board->width, p1_board->height) == 0) {
+        if(ships_left(p1_board, p1_board->width, p1_board->height) == 0) {
+            send(p1_conn_fd, "H 1", 3, 0);
+            send(p2_conn_fd, "H 0", 3, 0);
+            close(p1_conn_fd);
+            close(p2_conn_fd);
+            close(p1_listen_fd);
+            close(p2_listen_fd);
+            break;
+        }
 
-    //     }
+        if (p1_nbytes <= 0) {
+            perror("[Server] read() failed for Player 1.");
+            exit(EXIT_FAILURE);
+        }
 
-    // }
+        //Forfeit
+        if (strcmp(p1_buffer, "F") == 0) {
+            printf("[Server] Player 1 forfeited\n");
+            send(p1_conn_fd, "H 0", 3, 0); //Halt
+            send(p2_conn_fd, "H 1", 3, 0); //Halt
+            close(p1_conn_fd);
+            close(p2_conn_fd);
+            close(p1_listen_fd);
+            close(p2_listen_fd);
+            return 0;
+        }
+
+        if(p1_buffer[0] != 'S' || p1_buffer[0] != 'Q') {
+            send(p1_conn_fd, "E 102", 5, 0);
+        }
+        else if (p1_buffer[0] == 'Q'){ 
+            
+        }
+        
+
+
+    }
 
     printf("[Server] Shutting down.\n");
     close(p1_conn_fd);
