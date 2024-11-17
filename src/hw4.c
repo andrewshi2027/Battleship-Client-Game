@@ -508,6 +508,57 @@ int ships_left (Board *board, int width, int height) {
     }
 }
 
+char* query (Board *board, int width, int height) {
+    //G 5 M 0 0 H 1 1 H 1 2 M 4 4
+    int hits_misses = 4; //Initial Size: "G " + ships_remaining + '\0'
+
+    for (int i = 0; i < height; i++) {
+        for (int j = 0; j < width; j++) {
+            if (board->grid[i][j] == 100 || board->grid[i][j] == 200) {
+                hits_misses += 6; //Add space for each " H x y" or " M x y"
+            }
+        }
+    }
+
+    char* history = (char*)malloc(hits_misses * sizeof(char));
+
+    if (!history) {
+        return NULL;
+    }
+
+    char ships_remaining = ships_left(board, width, height) + '0'; //convert to char
+
+    history[0] = 'G';
+    history[1] = ' ';
+    history[2] = ships_remaining;
+
+    int history_index = 4;
+
+    for (int i = 0; i < height; i++) {
+        for (int j = 0; j < width; j++) {
+            //Hit or Miss
+            if (board->grid[i][j] == 100 || board->grid[i][j] == 200) {
+                history[history_index++] = ' ';
+                //Hit
+                if (board->grid[i][j] == 100) {
+                    history[history_index++] = 'H';
+                }
+                //Miss
+                else if (board->grid[i][j] == 200) {
+                    history[history_index++] = 'M';
+                }
+                history[history_index++] = ' ';
+                history[history_index++] = i + '0'; //convert i to char
+                history[history_index++] = ' ';
+                history[history_index++] = j + '0'; //convert j to char
+            }
+        }
+
+        history[history_index] = '/0';
+        return history;
+    }
+}
+
 int main() {
     int p1_listen_fd, p1_conn_fd, p2_listen_fd, p2_conn_fd;
     struct sockaddr_in p1_address, p2_address;
