@@ -702,28 +702,11 @@ int main() {
             return 0;
         }
 
-        // int pieces_index = 0;
-        // int space = 0;
-        // int pieces[20]; 
-        // int buffer_index = 2;
-    
-        // while (sscanf(&p1_buffer[buffer_index], "%d%n", &pieces[pieces_index], &space) == 1) {
-        //     pieces_index++;
-        //     buffer_index += space; 
-        //     if (pieces_index >= 20) {
-        //         send(p1_conn_fd, "E 201", 5, 0);
-        //         break;
-        //     }
-        // }
-
         if (p1_buffer[0] != 'I') {
             send(p1_conn_fd, "E 101", 5, 0);
             continue;
         }
-        // else if (pieces_index != 20) {
-        //     send(p1_conn_fd, "E 201", 5, 0);
-        //     continue;
-        // }
+
         else if (p1_buffer[0] == 'I') {
             printf("[Server] Player 1 Initializing\n");
             int error = initialize(p1_board, p1_buffer, p1_board->width, p1_board->height);
@@ -772,7 +755,13 @@ int main() {
         else if (p2_buffer[0] == 'I') {
             printf("[Server] Player 2 Initializing\n");
             int error = initialize(p2_board, p2_buffer, p2_board->width, p2_board->height);
-            if (error == 302) {
+            if (error == 300) {
+                send(p1_conn_fd, "E 300", 5, 0);
+            }
+            else if (error == 301) {
+                send(p1_conn_fd, "E 301", 5, 0);
+            }
+            else if (error == 302) {
                 send(p2_conn_fd, "E 302", 5, 0);
             }
             else if (error == 303) {
