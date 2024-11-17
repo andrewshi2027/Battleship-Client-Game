@@ -781,18 +781,23 @@ int main() {
             int error = initialize(p1_board, p1_buffer, p1_board->width, p1_board->height);
             if (error == 300) {
                 send(p1_conn_fd, "E 300", 5, 0);
+                continue;
             }
             else if (error == 301) {
                 send(p1_conn_fd, "E 301", 5, 0);
+                continue;
             }
             else if (error == 302) {
                 send(p1_conn_fd, "E 302", 5, 0);
+                continue;
             }
             else if (error == 303) {
                 send(p1_conn_fd, "E 303", 5, 0);
+                continue;
             }
             else if (error == 201) {
                 send(p1_conn_fd, "E 201", 5, 0);
+                continue;
             }
             else{
                 send(p1_conn_fd, "A", 1, 0);
@@ -828,18 +833,23 @@ int main() {
             int error = initialize(p2_board, p2_buffer, p2_board->width, p2_board->height);
             if (error == 300) {
                 send(p2_conn_fd, "E 300", 5, 0);
+                continue;
             }
             else if (error == 301) {
                 send(p2_conn_fd, "E 301", 5, 0);
+                continue;
             }
             else if (error == 302) {
                 send(p2_conn_fd, "E 302", 5, 0);
+                continue;
             }
             else if (error == 303) {
                 send(p2_conn_fd, "E 303", 5, 0);
+                continue;
             }
             else if (error == 201) {
                 send(p2_conn_fd, "E 201", 5, 0);
+                continue;
             }
             else{
                 send(p2_conn_fd, "A", 1, 0);
