@@ -107,6 +107,8 @@ int initialize(Board *board, char* buffer, int width, int height) {
         int piece_column = pieces[i + 2];
         int piece_row = pieces[i + 3];
 
+        int ship = 1;
+
         if (piece_type < 1 || piece_type > 7) {
             clear_board(board, width, height);
             return 300;
@@ -121,19 +123,19 @@ int initialize(Board *board, char* buffer, int width, int height) {
             case 1: //Shape 1
                 if (piece_rotation == 1 || piece_rotation == 2 || piece_rotation == 3 || piece_rotation == 4) {
                     if (board->grid[piece_row][piece_column] == 1) {clear_board(board, width, height); return 303;} 
-                    if (is_within_board(board, piece_row, piece_column) == 1) {board->grid[piece_row][piece_column] = 1;} 
+                    if (is_within_board(board, piece_row, piece_column) == 1) {board->grid[piece_row][piece_column] = ship;} 
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row][piece_column + 1] == 1) {clear_board(board, width, height); return 303;} 
-                    if (is_within_board(board, piece_row + 0, piece_column + 1) == 1) {board->grid[piece_row + 0][piece_column + 1] = 1;}    
+                    if (is_within_board(board, piece_row + 0, piece_column + 1) == 1) {board->grid[piece_row + 0][piece_column + 1] = ship;}    
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row + 1][piece_column + 0] == 1) {clear_board(board, width, height); return 303;} 
-                    if (is_within_board(board, piece_row + 1, piece_column + 0) == 1) {board->grid[piece_row + 1][piece_column + 0] = 1;}   
+                    if (is_within_board(board, piece_row + 1, piece_column + 0) == 1) {board->grid[piece_row + 1][piece_column + 0] = ship;}   
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row + 1][piece_column + 1] == 1) {clear_board(board, width, height); return 303;} 
-                    if (is_within_board(board, piece_row + 1, piece_column + 1) == 1) {board->grid[piece_row + 1][piece_column + 1] = 1;}           
+                    if (is_within_board(board, piece_row + 1, piece_column + 1) == 1) {board->grid[piece_row + 1][piece_column + 1] = ship;}           
                     else {clear_board(board, width, height); return 302;}
                 }
                 break;
@@ -141,37 +143,37 @@ int initialize(Board *board, char* buffer, int width, int height) {
             case 2: //Shape 2
                 if (piece_rotation == 1 || piece_rotation == 3) {
                     if (board->grid[piece_row][piece_column] == 1) {clear_board(board, width, height); return 303;} 
-                    if (is_within_board(board, piece_row, piece_column) == 1) {board->grid[piece_row][piece_column] = 2;} 
+                    if (is_within_board(board, piece_row, piece_column) == 1) {board->grid[piece_row][piece_column] = ship;} 
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row + 1][piece_column] == 1) {clear_board(board, width, height); return 303;} 
-                    if (is_within_board(board, piece_row + 1, piece_column) == 1) {board->grid[piece_row + 1][piece_column] = 2;}    
+                    if (is_within_board(board, piece_row + 1, piece_column) == 1) {board->grid[piece_row + 1][piece_column] = ship;}    
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row + 2][piece_column] == 1) {clear_board(board, width, height); return 303;} 
-                    if (is_within_board(board, piece_row + 2, piece_column) == 1) {board->grid[piece_row + 2][piece_column] = 2;}   
+                    if (is_within_board(board, piece_row + 2, piece_column) == 1) {board->grid[piece_row + 2][piece_column] = ship;}   
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row + 3][piece_column] == 1) {clear_board(board, width, height); return 303;} 
-                    if (is_within_board(board, piece_row + 3, piece_column) == 1) {board->grid[piece_row + 3][piece_column] = 2;}           
+                    if (is_within_board(board, piece_row + 3, piece_column) == 1) {board->grid[piece_row + 3][piece_column] = ship;}           
                     else {clear_board(board, width, height); return 302;}
                 }
                 
                 else if (piece_rotation == 2 || piece_rotation == 4) {
                     if (board->grid[piece_row][piece_column] == 1) {clear_board(board, width, height); return 303;} 
-                    if (is_within_board(board, piece_row, piece_column) == 1) {board->grid[piece_row][piece_column] = 2;} 
+                    if (is_within_board(board, piece_row, piece_column) == 1) {board->grid[piece_row][piece_column] = ship;} 
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row][piece_column + 1] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row, piece_column + 1) == 1) {board->grid[piece_row][piece_column + 1] = 2;}    
+                    if (is_within_board(board, piece_row, piece_column + 1) == 1) {board->grid[piece_row][piece_column + 1] = ship;}    
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row][piece_column + 2] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row, piece_column + 2) == 1) {board->grid[piece_row][piece_column + 2] = 2;}   
+                    if (is_within_board(board, piece_row, piece_column + 2) == 1) {board->grid[piece_row][piece_column + 2] = ship;}   
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row][piece_column + 3] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row, piece_column + 3) == 1) {board->grid[piece_row][piece_column + 3] = 2;}           
+                    if (is_within_board(board, piece_row, piece_column + 3) == 1) {board->grid[piece_row][piece_column + 3] = ship;}           
                     else {clear_board(board, width, height); return 302;}
                 }
                 break;
@@ -179,37 +181,37 @@ int initialize(Board *board, char* buffer, int width, int height) {
             case 3: //Shape 3
                 if (piece_rotation == 1 || piece_rotation == 3) {
                     if (board->grid[piece_row][piece_column] == 1) {clear_board(board, width, height); return 303;} 
-                    if (is_within_board(board, piece_row, piece_column) == 1) {board->grid[piece_row][piece_column] = 3;} 
+                    if (is_within_board(board, piece_row, piece_column) == 1) {board->grid[piece_row][piece_column] = ship;} 
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row][piece_column + 1] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row + 0, piece_column + 1) == 1) {board->grid[piece_row + 0][piece_column + 1] = 3;}    
+                    if (is_within_board(board, piece_row + 0, piece_column + 1) == 1) {board->grid[piece_row + 0][piece_column + 1] = ship;}    
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row - 1][piece_column + 1] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row - 1, piece_column + 1) == 1) {board->grid[piece_row - 1][piece_column + 1] = 3;}   
+                    if (is_within_board(board, piece_row - 1, piece_column + 1) == 1) {board->grid[piece_row - 1][piece_column + 1] = ship;}   
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row - 1][piece_column + 2] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row - 1, piece_column + 2) == 1) {board->grid[piece_row - 1][piece_column + 2] = 3;}           
+                    if (is_within_board(board, piece_row - 1, piece_column + 2) == 1) {board->grid[piece_row - 1][piece_column + 2] = ship;}           
                     else {clear_board(board, width, height); return 302;}
                 }
                 
                 else if (piece_rotation == 2 || piece_rotation == 4) {
                     if (board->grid[piece_row][piece_column] == 1) {clear_board(board, width, height); return 303;} 
-                    if (is_within_board(board, piece_row, piece_column) == 1) {board->grid[piece_row][piece_column] = 3;} 
+                    if (is_within_board(board, piece_row, piece_column) == 1) {board->grid[piece_row][piece_column] = ship;} 
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row + 1][piece_column] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row + 1, piece_column + 0) == 1) {board->grid[piece_row + 1][piece_column + 0] = 3;}    
+                    if (is_within_board(board, piece_row + 1, piece_column + 0) == 1) {board->grid[piece_row + 1][piece_column + 0] = ship;}    
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row + 1][piece_column + 1] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row + 1, piece_column + 1) == 1) {board->grid[piece_row + 1][piece_column + 1] = 3;}   
+                    if (is_within_board(board, piece_row + 1, piece_column + 1) == 1) {board->grid[piece_row + 1][piece_column + 1] = ship;}   
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row + 2][piece_column + 1] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row + 2, piece_column + 1) == 1) {board->grid[piece_row + 2][piece_column + 1] = 3;}           
+                    if (is_within_board(board, piece_row + 2, piece_column + 1) == 1) {board->grid[piece_row + 2][piece_column + 1] = ship;}           
                     else {clear_board(board, width, height); return 302;}
                 }
                 break;
@@ -217,73 +219,73 @@ int initialize(Board *board, char* buffer, int width, int height) {
             case 4: //Shape 4
                 if (piece_rotation == 1) {
                     if (board->grid[piece_row][piece_column] == 1) {clear_board(board, width, height); return 303;} 
-                    if (is_within_board(board, piece_row, piece_column) == 1) {board->grid[piece_row][piece_column] = 4;} 
+                    if (is_within_board(board, piece_row, piece_column) == 1) {board->grid[piece_row][piece_column] = ship;} 
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row + 1][piece_column] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row + 1, piece_column + 0) == 1) {board->grid[piece_row + 1][piece_column + 0] = 4;}    
+                    if (is_within_board(board, piece_row + 1, piece_column + 0) == 1) {board->grid[piece_row + 1][piece_column + 0] = ship;}    
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row + 2][piece_column] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row + 2, piece_column + 0) == 1) {board->grid[piece_row + 2][piece_column + 0] = 4;}   
+                    if (is_within_board(board, piece_row + 2, piece_column + 0) == 1) {board->grid[piece_row + 2][piece_column + 0] = ship;}   
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row + 2][piece_column + 1] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row + 2, piece_column + 1) == 1) {board->grid[piece_row + 2][piece_column + 1] = 4;}           
+                    if (is_within_board(board, piece_row + 2, piece_column + 1) == 1) {board->grid[piece_row + 2][piece_column + 1] = ship;}           
                     else {clear_board(board, width, height); return 302;}
                 }
 
                 else if (piece_rotation == 2) {
                     if (board->grid[piece_row][piece_column] == 1) {clear_board(board, width, height); return 303;} 
-                    if (is_within_board(board, piece_row, piece_column) == 1) {board->grid[piece_row][piece_column] = 4;} 
+                    if (is_within_board(board, piece_row, piece_column) == 1) {board->grid[piece_row][piece_column] = ship;} 
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row][piece_column + 1] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row + 0, piece_column + 1) == 1) {board->grid[piece_row + 0][piece_column + 1] = 4;}    
+                    if (is_within_board(board, piece_row + 0, piece_column + 1) == 1) {board->grid[piece_row + 0][piece_column + 1] = ship;}    
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row][piece_column + 2] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row + 0, piece_column + 2) == 1) {board->grid[piece_row + 0][piece_column + 2] = 4;}   
+                    if (is_within_board(board, piece_row + 0, piece_column + 2) == 1) {board->grid[piece_row + 0][piece_column + 2] = ship;}   
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row + 1][piece_column] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row + 1, piece_column + 0) == 1) {board->grid[piece_row + 1][piece_column + 0] = 4;}           
+                    if (is_within_board(board, piece_row + 1, piece_column + 0) == 1) {board->grid[piece_row + 1][piece_column + 0] = ship;}           
                     else {clear_board(board, width, height); return 302;}
                 }
 
                 else if (piece_rotation == 3) {
                     if (board->grid[piece_row][piece_column] == 1) {clear_board(board, width, height); return 303;} 
-                    if (is_within_board(board, piece_row, piece_column) == 1) {board->grid[piece_row][piece_column] = 4;} 
+                    if (is_within_board(board, piece_row, piece_column) == 1) {board->grid[piece_row][piece_column] = ship;} 
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row][piece_column + 1] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row + 0, piece_column + 1) == 1) {board->grid[piece_row + 0][piece_column + 1] = 4;}    
+                    if (is_within_board(board, piece_row + 0, piece_column + 1) == 1) {board->grid[piece_row + 0][piece_column + 1] = ship;}    
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row + 1][piece_column + 1] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row + 1, piece_column + 1) == 1) {board->grid[piece_row + 1][piece_column + 1] = 4;}   
+                    if (is_within_board(board, piece_row + 1, piece_column + 1) == 1) {board->grid[piece_row + 1][piece_column + 1] = ship;}   
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row + 2][piece_column + 1] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row + 2, piece_column + 1) == 1) {board->grid[piece_row + 2][piece_column + 1] = 4;}           
+                    if (is_within_board(board, piece_row + 2, piece_column + 1) == 1) {board->grid[piece_row + 2][piece_column + 1] = ship;}           
                     else {clear_board(board, width, height); return 302;}
                 }
 
                 else if (piece_rotation == 4) {
                     if (board->grid[piece_row][piece_column] == 1) {clear_board(board, width, height); return 303;} 
-                    if (is_within_board(board, piece_row, piece_column) == 1) {board->grid[piece_row][piece_column] = 4;} 
+                    if (is_within_board(board, piece_row, piece_column) == 1) {board->grid[piece_row][piece_column] = ship;} 
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row][piece_column + 1] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row + 0, piece_column + 1) == 1) {board->grid[piece_row + 0][piece_column + 1] = 4;}    
+                    if (is_within_board(board, piece_row + 0, piece_column + 1) == 1) {board->grid[piece_row + 0][piece_column + 1] = ship;}    
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row][piece_column + 2] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row + 0, piece_column + 2) == 1) {board->grid[piece_row + 0][piece_column + 2] = 4;}   
+                    if (is_within_board(board, piece_row + 0, piece_column + 2) == 1) {board->grid[piece_row + 0][piece_column + 2] = ship;}   
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row - 1][piece_column + 2] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row - 1, piece_column + 2) == 1) {board->grid[piece_row - 1][piece_column + 2] = 4;}           
+                    if (is_within_board(board, piece_row - 1, piece_column + 2) == 1) {board->grid[piece_row - 1][piece_column + 2] = ship;}           
                     else {clear_board(board, width, height); return 302;}
                 }
                 break;
@@ -291,37 +293,37 @@ int initialize(Board *board, char* buffer, int width, int height) {
             case 5: //Shape 5
                 if (piece_rotation == 1 || piece_rotation == 3) {
                     if (board->grid[piece_row][piece_column] == 1) {clear_board(board, width, height); return 303;} 
-                    if (is_within_board(board, piece_row, piece_column) == 1) {board->grid[piece_row][piece_column] = 5;} 
+                    if (is_within_board(board, piece_row, piece_column) == 1) {board->grid[piece_row][piece_column] = ship;} 
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row][piece_column + 1] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row + 0, piece_column + 1) == 1) {board->grid[piece_row + 0][piece_column + 1] = 5;}    
+                    if (is_within_board(board, piece_row + 0, piece_column + 1) == 1) {board->grid[piece_row + 0][piece_column + 1] = ship;}    
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row + 1][piece_column + 1] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row + 1, piece_column + 1) == 1) {board->grid[piece_row + 1][piece_column + 1] = 5;}   
+                    if (is_within_board(board, piece_row + 1, piece_column + 1) == 1) {board->grid[piece_row + 1][piece_column + 1] = ship;}   
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row + 1][piece_column + 2] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row + 1, piece_column + 2) == 1) {board->grid[piece_row + 1][piece_column + 2] = 5;}           
+                    if (is_within_board(board, piece_row + 1, piece_column + 2) == 1) {board->grid[piece_row + 1][piece_column + 2] = ship;}           
                     else {clear_board(board, width, height); return 302;}
                 }
                 
                 else if (piece_rotation == 2 || piece_rotation == 4) {
                     if (board->grid[piece_row][piece_column] == 1) {clear_board(board, width, height); return 303;} 
-                    if (is_within_board(board, piece_row, piece_column) == 1) {board->grid[piece_row][piece_column] = 5;} 
+                    if (is_within_board(board, piece_row, piece_column) == 1) {board->grid[piece_row][piece_column] = ship;} 
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row][piece_column + 1] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row + 0, piece_column + 1) == 1) {board->grid[piece_row + 0][piece_column + 1] = 5;}    
+                    if (is_within_board(board, piece_row + 0, piece_column + 1) == 1) {board->grid[piece_row + 0][piece_column + 1] = ship;}    
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row + 1][piece_column + 1] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row + 1, piece_column + 1) == 1) {board->grid[piece_row + 1][piece_column + 1] = 5;}   
+                    if (is_within_board(board, piece_row + 1, piece_column + 1) == 1) {board->grid[piece_row + 1][piece_column + 1] = ship;}   
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row - 1][piece_column] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row - 1, piece_column + 0) == 1) {board->grid[piece_row - 1][piece_column + 0] = 5;}           
+                    if (is_within_board(board, piece_row - 1, piece_column + 0) == 1) {board->grid[piece_row - 1][piece_column + 0] = ship;}           
                     else {clear_board(board, width, height); return 302;}
                 }
                 break;
@@ -329,73 +331,73 @@ int initialize(Board *board, char* buffer, int width, int height) {
             case 6: //Shape 6
                 if (piece_rotation == 1) {
                     if (board->grid[piece_row][piece_column] == 1) {clear_board(board, width, height); return 303;} 
-                    if (is_within_board(board, piece_row, piece_column) == 1) {board->grid[piece_row][piece_column] = 6;} 
+                    if (is_within_board(board, piece_row, piece_column) == 1) {board->grid[piece_row][piece_column] = ship;} 
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row][piece_column + 1] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row + 0, piece_column + 1) == 1) {board->grid[piece_row + 0][piece_column + 1] = 6;}    
+                    if (is_within_board(board, piece_row + 0, piece_column + 1) == 1) {board->grid[piece_row + 0][piece_column + 1] = ship;}    
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row - 1][piece_column + 1] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row - 1, piece_column + 1) == 1) {board->grid[piece_row - 1][piece_column + 1] = 6;}   
+                    if (is_within_board(board, piece_row - 1, piece_column + 1) == 1) {board->grid[piece_row - 1][piece_column + 1] = ship;}   
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row - 2][piece_column + 1] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row - 2, piece_column + 1) == 1) {board->grid[piece_row - 2][piece_column + 1] = 6;}           
+                    if (is_within_board(board, piece_row - 2, piece_column + 1) == 1) {board->grid[piece_row - 2][piece_column + 1] = ship;}           
                     else {clear_board(board, width, height); return 302;}
                 }
 
                 else if (piece_rotation == 2) {
                     if (board->grid[piece_row][piece_column] == 1) {clear_board(board, width, height); return 303;} 
-                    if (is_within_board(board, piece_row, piece_column) == 1) {board->grid[piece_row][piece_column] = 6;} 
+                    if (is_within_board(board, piece_row, piece_column) == 1) {board->grid[piece_row][piece_column] = ship;} 
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row + 1][piece_column] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row + 1, piece_column + 0) == 1) {board->grid[piece_row + 1][piece_column + 0] = 6;}    
+                    if (is_within_board(board, piece_row + 1, piece_column + 0) == 1) {board->grid[piece_row + 1][piece_column + 0] = ship;}    
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row + 1][piece_column + 1] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row + 1, piece_column + 1) == 1) {board->grid[piece_row + 1][piece_column + 1] = 6;}   
+                    if (is_within_board(board, piece_row + 1, piece_column + 1) == 1) {board->grid[piece_row + 1][piece_column + 1] = ship;}   
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row + 1][piece_column + 2] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row + 1, piece_column + 2) == 1) {board->grid[piece_row + 1][piece_column + 2] = 6;}           
+                    if (is_within_board(board, piece_row + 1, piece_column + 2) == 1) {board->grid[piece_row + 1][piece_column + 2] = ship;}           
                     else {clear_board(board, width, height); return 302;}
                 }
 
                 else if (piece_rotation == 3) {
                     if (board->grid[piece_row][piece_column] == 1) {clear_board(board, width, height); return 303;} 
-                    if (is_within_board(board, piece_row, piece_column) == 1) {board->grid[piece_row][piece_column] = 6;} 
+                    if (is_within_board(board, piece_row, piece_column) == 1) {board->grid[piece_row][piece_column] = ship;} 
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row][piece_column + 1] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row + 0, piece_column + 1) == 1) {board->grid[piece_row + 0][piece_column + 1] = 6;}    
+                    if (is_within_board(board, piece_row + 0, piece_column + 1) == 1) {board->grid[piece_row + 0][piece_column + 1] = ship;}    
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row + 1][piece_column] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row + 1, piece_column + 0) == 1) {board->grid[piece_row + 1][piece_column + 0] = 6;}   
+                    if (is_within_board(board, piece_row + 1, piece_column + 0) == 1) {board->grid[piece_row + 1][piece_column + 0] = ship;}   
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row + 2][piece_column] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row + 2, piece_column + 0) == 1) {board->grid[piece_row + 2][piece_column + 0] = 6;}           
+                    if (is_within_board(board, piece_row + 2, piece_column + 0) == 1) {board->grid[piece_row + 2][piece_column + 0] = ship;}           
                     else {clear_board(board, width, height); return 302;}
                 }
 
                 else if (piece_rotation == 4) {
                     if (board->grid[piece_row][piece_column] == 1) {clear_board(board, width, height); return 303;} 
-                    if (is_within_board(board, piece_row, piece_column) == 1) {board->grid[piece_row][piece_column] = 6;} 
+                    if (is_within_board(board, piece_row, piece_column) == 1) {board->grid[piece_row][piece_column] = ship;} 
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row][piece_column + 1] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row + 0, piece_column + 1) == 1) {board->grid[piece_row + 0][piece_column + 1] = 6;}    
+                    if (is_within_board(board, piece_row + 0, piece_column + 1) == 1) {board->grid[piece_row + 0][piece_column + 1] = ship;}    
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row][piece_column + 2] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row + 0, piece_column + 2) == 1) {board->grid[piece_row + 0][piece_column + 2] = 6;}   
+                    if (is_within_board(board, piece_row + 0, piece_column + 2) == 1) {board->grid[piece_row + 0][piece_column + 2] = ship;}   
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row + 1][piece_column + 2] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row + 1, piece_column + 2) == 1) {board->grid[piece_row + 1][piece_column + 2] = 6;}           
+                    if (is_within_board(board, piece_row + 1, piece_column + 2) == 1) {board->grid[piece_row + 1][piece_column + 2] = ship;}           
                     else {clear_board(board, width, height); return 302;}
                 }
                 break;
@@ -403,76 +405,77 @@ int initialize(Board *board, char* buffer, int width, int height) {
             case 7: //Shape 7
                 if (piece_rotation == 1) {
                     if (board->grid[piece_row][piece_column] == 1) {clear_board(board, width, height); return 303;} 
-                    if (is_within_board(board, piece_row, piece_column) == 1) {board->grid[piece_row][piece_column] = 7;} 
+                    if (is_within_board(board, piece_row, piece_column) == 1) {board->grid[piece_row][piece_column] = ship;} 
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row + 0][piece_column + 1] == 1) {clear_board(board, width, height); return 303;} 
-                    if (is_within_board(board, piece_row + 0, piece_column + 1) == 1) {board->grid[piece_row + 0][piece_column + 1] = 7;}    
+                    if (is_within_board(board, piece_row + 0, piece_column + 1) == 1) {board->grid[piece_row + 0][piece_column + 1] = ship;}    
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row][piece_column + 2] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row + 0, piece_column + 2) == 1) {board->grid[piece_row + 0][piece_column + 2] = 7;}   
+                    if (is_within_board(board, piece_row + 0, piece_column + 2) == 1) {board->grid[piece_row + 0][piece_column + 2] = ship;}   
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row + 1][piece_column + 1] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row + 1, piece_column + 1) == 1) {board->grid[piece_row + 1][piece_column + 1] = 7;}           
+                    if (is_within_board(board, piece_row + 1, piece_column + 1) == 1) {board->grid[piece_row + 1][piece_column + 1] = ship;}           
                     else {clear_board(board, width, height); return 302;}
                 }
 
                 else if (piece_rotation == 2) {
                     if (board->grid[piece_row][piece_column] == 1) {clear_board(board, width, height); return 303;} 
-                    if (is_within_board(board, piece_row, piece_column) == 1) {board->grid[piece_row][piece_column] = 7;} 
+                    if (is_within_board(board, piece_row, piece_column) == 1) {board->grid[piece_row][piece_column] = ship;} 
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row][piece_column + 1] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row + 0, piece_column + 1) == 1) {board->grid[piece_row + 0][piece_column + 1] = 7;}    
+                    if (is_within_board(board, piece_row + 0, piece_column + 1) == 1) {board->grid[piece_row + 0][piece_column + 1] = ship;}    
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row - 1][piece_column + 1] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row - 1, piece_column + 1) == 1) {board->grid[piece_row - 1][piece_column + 1] = 7;}   
+                    if (is_within_board(board, piece_row - 1, piece_column + 1) == 1) {board->grid[piece_row - 1][piece_column + 1] = ship;}   
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row + 1][piece_column + 1] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row + 1, piece_column + 1) == 1) {board->grid[piece_row + 1][piece_column + 1] = 7;}           
+                    if (is_within_board(board, piece_row + 1, piece_column + 1) == 1) {board->grid[piece_row + 1][piece_column + 1] = ship;}           
                     else {clear_board(board, width, height); return 302;}
                 }
 
                 else if (piece_rotation == 3) {
                     if (board->grid[piece_row][piece_column] == 1) {clear_board(board, width, height); return 303;} 
-                    if (is_within_board(board, piece_row, piece_column) == 1) {board->grid[piece_row][piece_column] = 7;} 
+                    if (is_within_board(board, piece_row, piece_column) == 1) {board->grid[piece_row][piece_column] = ship;} 
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row][piece_column + 1] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row + 0, piece_column + 1) == 1) {board->grid[piece_row + 0][piece_column + 1] = 7;}    
+                    if (is_within_board(board, piece_row + 0, piece_column + 1) == 1) {board->grid[piece_row + 0][piece_column + 1] = ship;}    
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row][piece_column + 2] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row + 0, piece_column + 2) == 1) {board->grid[piece_row + 0][piece_column + 2] = 7;}   
+                    if (is_within_board(board, piece_row + 0, piece_column + 2) == 1) {board->grid[piece_row + 0][piece_column + 2] = ship;}   
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row - 1][piece_column + 1] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row - 1, piece_column + 1) == 1) {board->grid[piece_row - 1][piece_column + 1] = 7;}           
+                    if (is_within_board(board, piece_row - 1, piece_column + 1) == 1) {board->grid[piece_row - 1][piece_column + 1] = ship;}           
                     else {clear_board(board, width, height); return 302;}
                 }
 
                 else if (piece_rotation == 4) {
                     if (board->grid[piece_row][piece_column] == 1) {clear_board(board, width, height); return 303;} 
-                    if (is_within_board(board, piece_row, piece_column) == 1) {board->grid[piece_row][piece_column] = 7;} 
+                    if (is_within_board(board, piece_row, piece_column) == 1) {board->grid[piece_row][piece_column] = ship;} 
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row + 1][piece_column] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row + 1, piece_column + 0) == 1) {board->grid[piece_row + 1][piece_column + 0] = 7;}    
+                    if (is_within_board(board, piece_row + 1, piece_column + 0) == 1) {board->grid[piece_row + 1][piece_column + 0] = ship;}    
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row + 2][piece_column] == 1) {clear_board(board, width, height); return 303;} 
-                    if (is_within_board(board, piece_row + 2, piece_column + 0) == 1) {board->grid[piece_row + 2][piece_column + 0] = 7;}   
+                    if (is_within_board(board, piece_row + 2, piece_column + 0) == 1) {board->grid[piece_row + 2][piece_column + 0] = ship;}   
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row + 1][piece_column + 1] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row + 1, piece_column + 1) == 1) {board->grid[piece_row + 1][piece_column + 1] = 7;}           
+                    if (is_within_board(board, piece_row + 1, piece_column + 1) == 1) {board->grid[piece_row + 1][piece_column + 1] = ship;}           
                     else {clear_board(board, width, height); return 302;}
                 }
                 break;
+        ship++;
         }
     }
     display_board(board, width, height);
@@ -500,7 +503,7 @@ int shoot(Board *board, int row, int column) {
 
 //Ships Left
 int ships_left (Board *board, int width, int height) {
-    int ship_1, ship_2, ship_3, ship_4, ship_5, ship_6, ship_7;
+    int ship_1, ship_2, ship_3, ship_4, ship_5;
 
     for (int i = 0; i < board->width; i++) {
         for (int j = 0; j < board->height; j++) {
@@ -519,15 +522,9 @@ int ships_left (Board *board, int width, int height) {
             else if(board->grid[i][j] == 5) {
                 ship_5 = 1;
             }
-            else if(board->grid[i][j] == 6) {
-                ship_6 = 1;
-            }
-            else if(board->grid[i][j] == 7) {
-                ship_7 = 1;
-            }
         }
     }
-    return ship_1 + ship_2 + ship_3 + ship_4 + ship_5 + ship_6 + ship_7;
+    return ship_1 + ship_2 + ship_3 + ship_4 + ship_5;
 }
 
 char* query (Board *board, int width, int height) {
