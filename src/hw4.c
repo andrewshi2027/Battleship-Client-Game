@@ -824,11 +824,14 @@ int main() {
         }
     }
 
-    //Player 1 Shoot
+    //Player 1 Shoot and Query
     while (1) {
         memset(p1_buffer, 0, BUFFER_SIZE);
         int p1_nbytes = read(p1_conn_fd, p1_buffer, BUFFER_SIZE);
+        int row, column;
+        char space;
 
+        //If Player 1 Lost
         if(ships_left(p1_board, p1_board->width, p1_board->height) == 0) {
             send(p1_conn_fd, "H 1", 3, 0);
             send(p2_conn_fd, "H 0", 3, 0);
@@ -860,10 +863,31 @@ int main() {
             send(p1_conn_fd, "E 102", 5, 0);
         }
         else if (p1_buffer[0] == 'Q'){ 
-            
+            char* history = query(p1_board, p1_board->width, p1_board->height);
+            send(p1_conn_fd, history, strlen(history), 0);
+            free(history);
+            continue;
+        }
+        else if (p1_buffer[0] == 'S') {
+            if (sscanf(p1_buffer, "S %d %d %c", &row, &column, &space) != 2) {
+                send(p1_conn_fd, "E 202", 5, 0);
+                continue;
+            }
+            if (row < 0 || row >= p1_board->height || column < 0 || column >= p1_board->width) {
+                send(p1_conn_fd, "E 400", 5, 0); //Shot outside board
+                continue;
+            }
+
+            int shooted = shoot(p2_board, row, column);
+
+            if (shooted == 300) {
+                send(p1_conn_fd, "E 401", 5, 0); //Cell already guessed
+            }
+
+
         }
         
-
+        
 
     }
 
