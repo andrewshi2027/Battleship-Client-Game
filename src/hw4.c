@@ -45,7 +45,8 @@ Board *begin(Board *board, int width, int height) {
             board->grid[i][j] = 0;
         }
     }
-    
+    display_board(board, width, height);
+    printf("\n");
     return board;
 }
 
@@ -81,10 +82,10 @@ int initialize(Board *board, char* buffer, int width, int height) {
         printf("Error");
         return 201;
     }
-
-    for (int i = 0; i < pieces_index; i++) {
-        printf("%d", pieces[i]);
-    }
+    // Print Buffer
+    // for (int i = 0; i < pieces_index; i++) {
+    //     printf("%d", pieces[i]);
+    // }
 
     for (int i = 0; i < pieces_index; i += 4) {
         int piece_type = pieces[i];
@@ -120,9 +121,6 @@ int initialize(Board *board, char* buffer, int width, int height) {
                     if (board->grid[piece_row + 1][piece_column + 1] == 1) {return 303;} 
                     if (is_within_board(board, piece_row + 1, piece_column + 1) == 1) {board->grid[piece_row + 1][piece_column + 1] = 1;}           
                     else {return 302;}
-
-                    display_board(board, width, height);
-                    printf("\n");
                 }
                 break;
                 
@@ -463,6 +461,8 @@ int initialize(Board *board, char* buffer, int width, int height) {
                 break;
         }
     }
+    display_board(board, width, height);
+    printf("\n");
 }
 
 //Shoot
@@ -662,7 +662,6 @@ int main() {
             continue;
         }
         else if (p2_buffer[0] == 'B' && strlen(p2_buffer) == 1) {
-            printf("Hello");
             send(p2_conn_fd, "A", 1, 0); //Send Acknowledgement
             break;
         }
@@ -702,11 +701,12 @@ int main() {
             else if (error == 303) {
                 send(p1_conn_fd, "E 303", 5, 0);
             }
-            else if(//Logic for param){
-                //send(p1_conn_fd, "E 201", 5, 0);
+            else if (error == 201) {
+                send(p1_conn_fd, "E 201", 5, 0);
             }
             else{
                 send(p1_conn_fd, "A", 1, 0);
+                break;
             }
         }
     }
@@ -731,8 +731,8 @@ int main() {
             send(p2_conn_fd, "E 101", 5, 0);
             continue;
         }
-        else if (p2_buffer[0] != 'I') {
-            printf("[Server] Player 2 Initializing");
+        else if (p2_buffer[0] == 'I') {
+            printf("[Server] Player 2 Initializing\n");
             int error = initialize(p2_board, p2_buffer, p2_board->width, p2_board->height);
             if (error == 302) {
                 send(p2_conn_fd, "E 302", 5, 0);
@@ -740,8 +740,12 @@ int main() {
             else if (error == 303) {
                 send(p2_conn_fd, "E 303", 5, 0);
             }
-            else {
+            else if (error == 201) {
                 send(p2_conn_fd, "E 201", 5, 0);
+            }
+            else{
+                send(p2_conn_fd, "A", 1, 0);
+                break;
             }
         }
     }
