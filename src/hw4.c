@@ -487,7 +487,7 @@ int initialize(Board *board, char* buffer, int width, int height) {
 //Shoot
 int shoot(Board *board, int row, int column) {
     //Hit
-    if (board->grid[row][column] == 1) {
+    if (board->grid[row][column] == 1 || board->grid[row][column] == 2 ||board->grid[row][column] == 3 || board->grid[row][column] == 4 || board->grid[row][column] == 5) {
         board->grid[row][column] = 100;
         return 100;
     }
@@ -852,7 +852,7 @@ int main() {
         while (1) {
             memset(p1_buffer, 0, BUFFER_SIZE);
             int p1_nbytes = read(p1_conn_fd, p1_buffer, BUFFER_SIZE);
-            int row, column;
+            int row = 0, column = 0;
             char space;
 
             //If Player 1 Lost and Player 2 Won
@@ -903,6 +903,8 @@ int main() {
                 }
 
                 int shooted = shoot(p2_board, row, column);
+                display_board(p2_board, p2_board->width, p2_board->height);
+                printf("\n");
 
                 if (shooted == 300) {
                     send(p1_conn_fd, "E 401", 5, 0); //Cell already guessed
@@ -935,7 +937,7 @@ int main() {
         while (1) {
             memset(p2_buffer, 0, BUFFER_SIZE);
             int p2_nbytes = read(p2_conn_fd, p2_buffer, BUFFER_SIZE);
-            int row, column;
+            int row = 0, column = 0;
             char space;
 
             //If Player 2 Lost and Player 1 Won
@@ -986,6 +988,8 @@ int main() {
                 }
 
                 int shooted = shoot(p1_board, row, column);
+                display_board(p1_board, p1_board->width, p1_board->height);
+                printf("\n");
 
                 if (shooted == 300) {
                     send(p2_conn_fd, "E 401", 5, 0); //Cell already guessed
