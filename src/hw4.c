@@ -141,37 +141,37 @@ int initialize(Board *board, char* buffer, int width, int height) {
             case 2: //Shape 2
                 if (piece_rotation == 1 || piece_rotation == 3) {
                     if (board->grid[piece_row][piece_column] == 1) {clear_board(board, width, height); return 303;} 
-                    if (is_within_board(board, piece_row, piece_column) == 1) {board->grid[piece_row][piece_column] = 1;} 
+                    if (is_within_board(board, piece_row, piece_column) == 1) {board->grid[piece_row][piece_column] = 2;} 
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row + 1][piece_column] == 1) {clear_board(board, width, height); return 303;} 
-                    if (is_within_board(board, piece_row + 1, piece_column) == 1) {board->grid[piece_row + 1][piece_column] = 1;}    
+                    if (is_within_board(board, piece_row + 1, piece_column) == 1) {board->grid[piece_row + 1][piece_column] = 2;}    
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row + 2][piece_column] == 1) {clear_board(board, width, height); return 303;} 
-                    if (is_within_board(board, piece_row + 2, piece_column) == 1) {board->grid[piece_row + 2][piece_column] = 1;}   
+                    if (is_within_board(board, piece_row + 2, piece_column) == 1) {board->grid[piece_row + 2][piece_column] = 2;}   
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row + 3][piece_column] == 1) {clear_board(board, width, height); return 303;} 
-                    if (is_within_board(board, piece_row + 3, piece_column) == 1) {board->grid[piece_row + 3][piece_column] = 1;}           
+                    if (is_within_board(board, piece_row + 3, piece_column) == 1) {board->grid[piece_row + 3][piece_column] = 2;}           
                     else {clear_board(board, width, height); return 302;}
                 }
                 
                 else if (piece_rotation == 2 || piece_rotation == 4) {
                     if (board->grid[piece_row][piece_column] == 1) {clear_board(board, width, height); return 303;} 
-                    if (is_within_board(board, piece_row, piece_column) == 1) {board->grid[piece_row][piece_column] = 1;} 
+                    if (is_within_board(board, piece_row, piece_column) == 1) {board->grid[piece_row][piece_column] = 2;} 
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row][piece_column + 1] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row, piece_column + 1) == 1) {board->grid[piece_row][piece_column + 1] = 1;}    
+                    if (is_within_board(board, piece_row, piece_column + 1) == 1) {board->grid[piece_row][piece_column + 1] = 2;}    
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row][piece_column + 2] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row, piece_column + 2) == 1) {board->grid[piece_row][piece_column + 2] = 1;}   
+                    if (is_within_board(board, piece_row, piece_column + 2) == 1) {board->grid[piece_row][piece_column + 2] = 2;}   
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row][piece_column + 3] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row, piece_column + 3) == 1) {board->grid[piece_row][piece_column + 3] = 1;}           
+                    if (is_within_board(board, piece_row, piece_column + 3) == 1) {board->grid[piece_row][piece_column + 3] = 2;}           
                     else {clear_board(board, width, height); return 302;}
                 }
                 break;
@@ -179,37 +179,37 @@ int initialize(Board *board, char* buffer, int width, int height) {
             case 3: //Shape 3
                 if (piece_rotation == 1 || piece_rotation == 3) {
                     if (board->grid[piece_row][piece_column] == 1) {clear_board(board, width, height); return 303;} 
-                    if (is_within_board(board, piece_row, piece_column) == 1) {board->grid[piece_row][piece_column] = 1;} 
+                    if (is_within_board(board, piece_row, piece_column) == 1) {board->grid[piece_row][piece_column] = 3;} 
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row][piece_column + 1] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row + 0, piece_column + 1) == 1) {board->grid[piece_row + 0][piece_column + 1] = 1;}    
+                    if (is_within_board(board, piece_row + 0, piece_column + 1) == 1) {board->grid[piece_row + 0][piece_column + 1] = 3;}    
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row - 1][piece_column + 1] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row - 1, piece_column + 1) == 1) {board->grid[piece_row - 1][piece_column + 1] = 1;}   
+                    if (is_within_board(board, piece_row - 1, piece_column + 1) == 1) {board->grid[piece_row - 1][piece_column + 1] = 3;}   
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row - 1][piece_column + 2] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row - 1, piece_column + 2) == 1) {board->grid[piece_row - 1][piece_column + 2] = 1;}           
+                    if (is_within_board(board, piece_row - 1, piece_column + 2) == 1) {board->grid[piece_row - 1][piece_column + 2] = 3;}           
                     else {clear_board(board, width, height); return 302;}
                 }
                 
                 else if (piece_rotation == 2 || piece_rotation == 4) {
                     if (board->grid[piece_row][piece_column] == 1) {clear_board(board, width, height); return 303;} 
-                    if (is_within_board(board, piece_row, piece_column) == 1) {board->grid[piece_row][piece_column] = 1;} 
+                    if (is_within_board(board, piece_row, piece_column) == 1) {board->grid[piece_row][piece_column] = 3;} 
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row + 1][piece_column] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row + 1, piece_column + 0) == 1) {board->grid[piece_row + 1][piece_column + 0] = 1;}    
+                    if (is_within_board(board, piece_row + 1, piece_column + 0) == 1) {board->grid[piece_row + 1][piece_column + 0] = 3;}    
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row + 1][piece_column + 1] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row + 1, piece_column + 1) == 1) {board->grid[piece_row + 1][piece_column + 1] = 1;}   
+                    if (is_within_board(board, piece_row + 1, piece_column + 1) == 1) {board->grid[piece_row + 1][piece_column + 1] = 3;}   
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row + 2][piece_column + 1] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row + 2, piece_column + 1) == 1) {board->grid[piece_row + 2][piece_column + 1] = 1;}           
+                    if (is_within_board(board, piece_row + 2, piece_column + 1) == 1) {board->grid[piece_row + 2][piece_column + 1] = 3;}           
                     else {clear_board(board, width, height); return 302;}
                 }
                 break;
@@ -217,73 +217,73 @@ int initialize(Board *board, char* buffer, int width, int height) {
             case 4: //Shape 4
                 if (piece_rotation == 1) {
                     if (board->grid[piece_row][piece_column] == 1) {clear_board(board, width, height); return 303;} 
-                    if (is_within_board(board, piece_row, piece_column) == 1) {board->grid[piece_row][piece_column] = 1;} 
+                    if (is_within_board(board, piece_row, piece_column) == 1) {board->grid[piece_row][piece_column] = 4;} 
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row + 1][piece_column] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row + 1, piece_column + 0) == 1) {board->grid[piece_row + 1][piece_column + 0] = 1;}    
+                    if (is_within_board(board, piece_row + 1, piece_column + 0) == 1) {board->grid[piece_row + 1][piece_column + 0] = 4;}    
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row + 2][piece_column] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row + 2, piece_column + 0) == 1) {board->grid[piece_row + 2][piece_column + 0] = 1;}   
+                    if (is_within_board(board, piece_row + 2, piece_column + 0) == 1) {board->grid[piece_row + 2][piece_column + 0] = 4;}   
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row + 2][piece_column + 1] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row + 2, piece_column + 1) == 1) {board->grid[piece_row + 2][piece_column + 1] = 1;}           
+                    if (is_within_board(board, piece_row + 2, piece_column + 1) == 1) {board->grid[piece_row + 2][piece_column + 1] = 4;}           
                     else {clear_board(board, width, height); return 302;}
                 }
 
                 else if (piece_rotation == 2) {
                     if (board->grid[piece_row][piece_column] == 1) {clear_board(board, width, height); return 303;} 
-                    if (is_within_board(board, piece_row, piece_column) == 1) {board->grid[piece_row][piece_column] = 1;} 
+                    if (is_within_board(board, piece_row, piece_column) == 1) {board->grid[piece_row][piece_column] = 4;} 
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row][piece_column + 1] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row + 0, piece_column + 1) == 1) {board->grid[piece_row + 0][piece_column + 1] = 1;}    
+                    if (is_within_board(board, piece_row + 0, piece_column + 1) == 1) {board->grid[piece_row + 0][piece_column + 1] = 4;}    
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row][piece_column + 2] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row + 0, piece_column + 2) == 1) {board->grid[piece_row + 0][piece_column + 2] = 1;}   
+                    if (is_within_board(board, piece_row + 0, piece_column + 2) == 1) {board->grid[piece_row + 0][piece_column + 2] = 4;}   
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row + 1][piece_column] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row + 1, piece_column + 0) == 1) {board->grid[piece_row + 1][piece_column + 0] = 1;}           
+                    if (is_within_board(board, piece_row + 1, piece_column + 0) == 1) {board->grid[piece_row + 1][piece_column + 0] = 4;}           
                     else {clear_board(board, width, height); return 302;}
                 }
 
                 else if (piece_rotation == 3) {
                     if (board->grid[piece_row][piece_column] == 1) {clear_board(board, width, height); return 303;} 
-                    if (is_within_board(board, piece_row, piece_column) == 1) {board->grid[piece_row][piece_column] = 1;} 
+                    if (is_within_board(board, piece_row, piece_column) == 1) {board->grid[piece_row][piece_column] = 4;} 
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row][piece_column + 1] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row + 0, piece_column + 1) == 1) {board->grid[piece_row + 0][piece_column + 1] = 1;}    
+                    if (is_within_board(board, piece_row + 0, piece_column + 1) == 1) {board->grid[piece_row + 0][piece_column + 1] = 4;}    
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row + 1][piece_column + 1] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row + 1, piece_column + 1) == 1) {board->grid[piece_row + 1][piece_column + 1] = 1;}   
+                    if (is_within_board(board, piece_row + 1, piece_column + 1) == 1) {board->grid[piece_row + 1][piece_column + 1] = 4;}   
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row + 2][piece_column + 1] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row + 2, piece_column + 1) == 1) {board->grid[piece_row + 2][piece_column + 1] = 1;}           
+                    if (is_within_board(board, piece_row + 2, piece_column + 1) == 1) {board->grid[piece_row + 2][piece_column + 1] = 4;}           
                     else {clear_board(board, width, height); return 302;}
                 }
 
                 else if (piece_rotation == 4) {
                     if (board->grid[piece_row][piece_column] == 1) {clear_board(board, width, height); return 303;} 
-                    if (is_within_board(board, piece_row, piece_column) == 1) {board->grid[piece_row][piece_column] = 1;} 
+                    if (is_within_board(board, piece_row, piece_column) == 1) {board->grid[piece_row][piece_column] = 4;} 
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row][piece_column + 1] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row + 0, piece_column + 1) == 1) {board->grid[piece_row + 0][piece_column + 1] = 1;}    
+                    if (is_within_board(board, piece_row + 0, piece_column + 1) == 1) {board->grid[piece_row + 0][piece_column + 1] = 4;}    
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row][piece_column + 2] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row + 0, piece_column + 2) == 1) {board->grid[piece_row + 0][piece_column + 2] = 1;}   
+                    if (is_within_board(board, piece_row + 0, piece_column + 2) == 1) {board->grid[piece_row + 0][piece_column + 2] = 4;}   
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row - 1][piece_column + 2] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row - 1, piece_column + 2) == 1) {board->grid[piece_row - 1][piece_column + 2] = 1;}           
+                    if (is_within_board(board, piece_row - 1, piece_column + 2) == 1) {board->grid[piece_row - 1][piece_column + 2] = 4;}           
                     else {clear_board(board, width, height); return 302;}
                 }
                 break;
@@ -291,37 +291,37 @@ int initialize(Board *board, char* buffer, int width, int height) {
             case 5: //Shape 5
                 if (piece_rotation == 1 || piece_rotation == 3) {
                     if (board->grid[piece_row][piece_column] == 1) {clear_board(board, width, height); return 303;} 
-                    if (is_within_board(board, piece_row, piece_column) == 1) {board->grid[piece_row][piece_column] = 1;} 
+                    if (is_within_board(board, piece_row, piece_column) == 1) {board->grid[piece_row][piece_column] = 5;} 
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row][piece_column + 1] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row + 0, piece_column + 1) == 1) {board->grid[piece_row + 0][piece_column + 1] = 1;}    
+                    if (is_within_board(board, piece_row + 0, piece_column + 1) == 1) {board->grid[piece_row + 0][piece_column + 1] = 5;}    
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row + 1][piece_column + 1] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row + 1, piece_column + 1) == 1) {board->grid[piece_row + 1][piece_column + 1] = 1;}   
+                    if (is_within_board(board, piece_row + 1, piece_column + 1) == 1) {board->grid[piece_row + 1][piece_column + 1] = 5;}   
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row + 1][piece_column + 2] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row + 1, piece_column + 2) == 1) {board->grid[piece_row + 1][piece_column + 2] = 1;}           
+                    if (is_within_board(board, piece_row + 1, piece_column + 2) == 1) {board->grid[piece_row + 1][piece_column + 2] = 5;}           
                     else {clear_board(board, width, height); return 302;}
                 }
                 
                 else if (piece_rotation == 2 || piece_rotation == 4) {
                     if (board->grid[piece_row][piece_column] == 1) {clear_board(board, width, height); return 303;} 
-                    if (is_within_board(board, piece_row, piece_column) == 1) {board->grid[piece_row][piece_column] = 1;} 
+                    if (is_within_board(board, piece_row, piece_column) == 1) {board->grid[piece_row][piece_column] = 5;} 
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row][piece_column + 1] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row + 0, piece_column + 1) == 1) {board->grid[piece_row + 0][piece_column + 1] = 1;}    
+                    if (is_within_board(board, piece_row + 0, piece_column + 1) == 1) {board->grid[piece_row + 0][piece_column + 1] = 5;}    
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row + 1][piece_column + 1] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row + 1, piece_column + 1) == 1) {board->grid[piece_row + 1][piece_column + 1] = 1;}   
+                    if (is_within_board(board, piece_row + 1, piece_column + 1) == 1) {board->grid[piece_row + 1][piece_column + 1] = 5;}   
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row - 1][piece_column] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row - 1, piece_column + 0) == 1) {board->grid[piece_row - 1][piece_column + 0] = 1;}           
+                    if (is_within_board(board, piece_row - 1, piece_column + 0) == 1) {board->grid[piece_row - 1][piece_column + 0] = 5;}           
                     else {clear_board(board, width, height); return 302;}
                 }
                 break;
@@ -329,73 +329,73 @@ int initialize(Board *board, char* buffer, int width, int height) {
             case 6: //Shape 6
                 if (piece_rotation == 1) {
                     if (board->grid[piece_row][piece_column] == 1) {clear_board(board, width, height); return 303;} 
-                    if (is_within_board(board, piece_row, piece_column) == 1) {board->grid[piece_row][piece_column] = 1;} 
+                    if (is_within_board(board, piece_row, piece_column) == 1) {board->grid[piece_row][piece_column] = 6;} 
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row][piece_column + 1] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row + 0, piece_column + 1) == 1) {board->grid[piece_row + 0][piece_column + 1] = 1;}    
+                    if (is_within_board(board, piece_row + 0, piece_column + 1) == 1) {board->grid[piece_row + 0][piece_column + 1] = 6;}    
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row - 1][piece_column + 1] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row - 1, piece_column + 1) == 1) {board->grid[piece_row - 1][piece_column + 1] = 1;}   
+                    if (is_within_board(board, piece_row - 1, piece_column + 1) == 1) {board->grid[piece_row - 1][piece_column + 1] = 6;}   
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row - 2][piece_column + 1] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row - 2, piece_column + 1) == 1) {board->grid[piece_row - 2][piece_column + 1] = 1;}           
+                    if (is_within_board(board, piece_row - 2, piece_column + 1) == 1) {board->grid[piece_row - 2][piece_column + 1] = 6;}           
                     else {clear_board(board, width, height); return 302;}
                 }
 
                 else if (piece_rotation == 2) {
                     if (board->grid[piece_row][piece_column] == 1) {clear_board(board, width, height); return 303;} 
-                    if (is_within_board(board, piece_row, piece_column) == 1) {board->grid[piece_row][piece_column] = 1;} 
+                    if (is_within_board(board, piece_row, piece_column) == 1) {board->grid[piece_row][piece_column] = 6;} 
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row + 1][piece_column] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row + 1, piece_column + 0) == 1) {board->grid[piece_row + 1][piece_column + 0] = 1;}    
+                    if (is_within_board(board, piece_row + 1, piece_column + 0) == 1) {board->grid[piece_row + 1][piece_column + 0] = 6;}    
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row + 1][piece_column + 1] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row + 1, piece_column + 1) == 1) {board->grid[piece_row + 1][piece_column + 1] = 1;}   
+                    if (is_within_board(board, piece_row + 1, piece_column + 1) == 1) {board->grid[piece_row + 1][piece_column + 1] = 6;}   
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row + 1][piece_column + 2] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row + 1, piece_column + 2) == 1) {board->grid[piece_row + 1][piece_column + 2] = 1;}           
+                    if (is_within_board(board, piece_row + 1, piece_column + 2) == 1) {board->grid[piece_row + 1][piece_column + 2] = 6;}           
                     else {clear_board(board, width, height); return 302;}
                 }
 
                 else if (piece_rotation == 3) {
                     if (board->grid[piece_row][piece_column] == 1) {clear_board(board, width, height); return 303;} 
-                    if (is_within_board(board, piece_row, piece_column) == 1) {board->grid[piece_row][piece_column] = 1;} 
+                    if (is_within_board(board, piece_row, piece_column) == 1) {board->grid[piece_row][piece_column] = 6;} 
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row][piece_column + 1] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row + 0, piece_column + 1) == 1) {board->grid[piece_row + 0][piece_column + 1] = 1;}    
+                    if (is_within_board(board, piece_row + 0, piece_column + 1) == 1) {board->grid[piece_row + 0][piece_column + 1] = 6;}    
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row + 1][piece_column] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row + 1, piece_column + 0) == 1) {board->grid[piece_row + 1][piece_column + 0] = 1;}   
+                    if (is_within_board(board, piece_row + 1, piece_column + 0) == 1) {board->grid[piece_row + 1][piece_column + 0] = 6;}   
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row + 2][piece_column] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row + 2, piece_column + 0) == 1) {board->grid[piece_row + 2][piece_column + 0] = 1;}           
+                    if (is_within_board(board, piece_row + 2, piece_column + 0) == 1) {board->grid[piece_row + 2][piece_column + 0] = 6;}           
                     else {clear_board(board, width, height); return 302;}
                 }
 
                 else if (piece_rotation == 4) {
                     if (board->grid[piece_row][piece_column] == 1) {clear_board(board, width, height); return 303;} 
-                    if (is_within_board(board, piece_row, piece_column) == 1) {board->grid[piece_row][piece_column] = 1;} 
+                    if (is_within_board(board, piece_row, piece_column) == 1) {board->grid[piece_row][piece_column] = 6;} 
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row][piece_column + 1] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row + 0, piece_column + 1) == 1) {board->grid[piece_row + 0][piece_column + 1] = 1;}    
+                    if (is_within_board(board, piece_row + 0, piece_column + 1) == 1) {board->grid[piece_row + 0][piece_column + 1] = 6;}    
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row][piece_column + 2] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row + 0, piece_column + 2) == 1) {board->grid[piece_row + 0][piece_column + 2] = 1;}   
+                    if (is_within_board(board, piece_row + 0, piece_column + 2) == 1) {board->grid[piece_row + 0][piece_column + 2] = 6;}   
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row + 1][piece_column + 2] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row + 1, piece_column + 2) == 1) {board->grid[piece_row + 1][piece_column + 2] = 1;}           
+                    if (is_within_board(board, piece_row + 1, piece_column + 2) == 1) {board->grid[piece_row + 1][piece_column + 2] = 6;}           
                     else {clear_board(board, width, height); return 302;}
                 }
                 break;
@@ -403,73 +403,73 @@ int initialize(Board *board, char* buffer, int width, int height) {
             case 7: //Shape 7
                 if (piece_rotation == 1) {
                     if (board->grid[piece_row][piece_column] == 1) {clear_board(board, width, height); return 303;} 
-                    if (is_within_board(board, piece_row, piece_column) == 1) {board->grid[piece_row][piece_column] = 1;} 
+                    if (is_within_board(board, piece_row, piece_column) == 1) {board->grid[piece_row][piece_column] = 7;} 
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row + 0][piece_column + 1] == 1) {clear_board(board, width, height); return 303;} 
-                    if (is_within_board(board, piece_row + 0, piece_column + 1) == 1) {board->grid[piece_row + 0][piece_column + 1] = 1;}    
+                    if (is_within_board(board, piece_row + 0, piece_column + 1) == 1) {board->grid[piece_row + 0][piece_column + 1] = 7;}    
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row][piece_column + 2] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row + 0, piece_column + 2) == 1) {board->grid[piece_row + 0][piece_column + 2] = 1;}   
+                    if (is_within_board(board, piece_row + 0, piece_column + 2) == 1) {board->grid[piece_row + 0][piece_column + 2] = 7;}   
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row + 1][piece_column + 1] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row + 1, piece_column + 1) == 1) {board->grid[piece_row + 1][piece_column + 1] = 1;}           
+                    if (is_within_board(board, piece_row + 1, piece_column + 1) == 1) {board->grid[piece_row + 1][piece_column + 1] = 7;}           
                     else {clear_board(board, width, height); return 302;}
                 }
 
                 else if (piece_rotation == 2) {
                     if (board->grid[piece_row][piece_column] == 1) {clear_board(board, width, height); return 303;} 
-                    if (is_within_board(board, piece_row, piece_column) == 1) {board->grid[piece_row][piece_column] = 1;} 
+                    if (is_within_board(board, piece_row, piece_column) == 1) {board->grid[piece_row][piece_column] = 7;} 
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row][piece_column + 1] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row + 0, piece_column + 1) == 1) {board->grid[piece_row + 0][piece_column + 1] = 1;}    
+                    if (is_within_board(board, piece_row + 0, piece_column + 1) == 1) {board->grid[piece_row + 0][piece_column + 1] = 7;}    
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row - 1][piece_column + 1] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row - 1, piece_column + 1) == 1) {board->grid[piece_row - 1][piece_column + 1] = 1;}   
+                    if (is_within_board(board, piece_row - 1, piece_column + 1) == 1) {board->grid[piece_row - 1][piece_column + 1] = 7;}   
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row + 1][piece_column + 1] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row + 1, piece_column + 1) == 1) {board->grid[piece_row + 1][piece_column + 1] = 1;}           
+                    if (is_within_board(board, piece_row + 1, piece_column + 1) == 1) {board->grid[piece_row + 1][piece_column + 1] = 7;}           
                     else {clear_board(board, width, height); return 302;}
                 }
 
                 else if (piece_rotation == 3) {
                     if (board->grid[piece_row][piece_column] == 1) {clear_board(board, width, height); return 303;} 
-                    if (is_within_board(board, piece_row, piece_column) == 1) {board->grid[piece_row][piece_column] = 1;} 
+                    if (is_within_board(board, piece_row, piece_column) == 1) {board->grid[piece_row][piece_column] = 7;} 
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row][piece_column + 1] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row + 0, piece_column + 1) == 1) {board->grid[piece_row + 0][piece_column + 1] = 1;}    
+                    if (is_within_board(board, piece_row + 0, piece_column + 1) == 1) {board->grid[piece_row + 0][piece_column + 1] = 7;}    
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row][piece_column + 2] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row + 0, piece_column + 2) == 1) {board->grid[piece_row + 0][piece_column + 2] = 1;}   
+                    if (is_within_board(board, piece_row + 0, piece_column + 2) == 1) {board->grid[piece_row + 0][piece_column + 2] = 7;}   
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row - 1][piece_column + 1] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row - 1, piece_column + 1) == 1) {board->grid[piece_row - 1][piece_column + 1] = 1;}           
+                    if (is_within_board(board, piece_row - 1, piece_column + 1) == 1) {board->grid[piece_row - 1][piece_column + 1] = 7;}           
                     else {clear_board(board, width, height); return 302;}
                 }
 
                 else if (piece_rotation == 4) {
                     if (board->grid[piece_row][piece_column] == 1) {clear_board(board, width, height); return 303;} 
-                    if (is_within_board(board, piece_row, piece_column) == 1) {board->grid[piece_row][piece_column] = 1;} 
+                    if (is_within_board(board, piece_row, piece_column) == 1) {board->grid[piece_row][piece_column] = 7;} 
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row + 1][piece_column] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row + 1, piece_column + 0) == 1) {board->grid[piece_row + 1][piece_column + 0] = 1;}    
+                    if (is_within_board(board, piece_row + 1, piece_column + 0) == 1) {board->grid[piece_row + 1][piece_column + 0] = 7;}    
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row + 2][piece_column] == 1) {clear_board(board, width, height); return 303;} 
-                    if (is_within_board(board, piece_row + 2, piece_column + 0) == 1) {board->grid[piece_row + 2][piece_column + 0] = 1;}   
+                    if (is_within_board(board, piece_row + 2, piece_column + 0) == 1) {board->grid[piece_row + 2][piece_column + 0] = 7;}   
                     else {clear_board(board, width, height); return 302;}
 
                     if (board->grid[piece_row + 1][piece_column + 1] == 1) {clear_board(board, width, height); return 303;}
-                    if (is_within_board(board, piece_row + 1, piece_column + 1) == 1) {board->grid[piece_row + 1][piece_column + 1] = 1;}           
+                    if (is_within_board(board, piece_row + 1, piece_column + 1) == 1) {board->grid[piece_row + 1][piece_column + 1] = 7;}           
                     else {clear_board(board, width, height); return 302;}
                 }
                 break;
@@ -500,12 +500,34 @@ int shoot(Board *board, int row, int column) {
 
 //Ships Left
 int ships_left (Board *board, int width, int height) {
-    int ships = 0;
+    int ship_1, ship_2, ship_3, ship_4, ship_5, ship_6, ship_7;
+
     for (int i = 0; i < board->width; i++) {
         for (int j = 0; j < board->height; j++) {
-            if(board->grid[i][j] == 1) {ships++;}
+            if(board->grid[i][j] == 1) {
+                ship_1 = 1;
+            }
+            else if(board->grid[i][j] == 2) {
+                ship_2 = 1;
+            }
+            else if(board->grid[i][j] == 3) {
+                ship_3 = 1;
+            }
+            else if(board->grid[i][j] == 4) {
+                ship_4 = 1;
+            }
+            else if(board->grid[i][j] == 5) {
+                ship_5 = 1;
+            }
+            else if(board->grid[i][j] == 6) {
+                ship_6 = 1;
+            }
+            else if(board->grid[i][j] == 7) {
+                ship_7 = 1;
+            }
         }
     }
+    return ship_1 + ship_2 + ship_3 + ship_4 + ship_5 + ship_6 + ship_7;
 }
 
 char* query (Board *board, int width, int height) {
@@ -554,7 +576,7 @@ char* query (Board *board, int width, int height) {
             }
         }
 
-        history[history_index] = '/0';
+        history[history_index] = '\0';
         return history;
     }
 }
@@ -859,7 +881,7 @@ int main() {
             return 0;
         }
 
-        if(p1_buffer[0] != 'S' || p1_buffer[0] != 'Q') {
+        if(p1_buffer[0] != 'S' && p1_buffer[0] != 'Q') {
             send(p1_conn_fd, "E 102", 5, 0);
         }
         else if (p1_buffer[0] == 'Q'){ 
@@ -941,7 +963,7 @@ int main() {
             return 0;
         }
 
-        if(p2_buffer[0] != 'S' || p2_buffer[0] != 'Q') {
+        if(p2_buffer[0] != 'S' && p2_buffer[0] != 'Q') {
             send(p1_conn_fd, "E 102", 5, 0);
         }
         else if (p1_buffer[0] == 'Q'){ 
