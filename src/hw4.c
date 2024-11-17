@@ -505,7 +505,11 @@ int shoot(Board *board, int row, int column) {
 
 //Ships Left
 int ships_left (Board *board, int width, int height) {
-    int ship_1, ship_2, ship_3, ship_4, ship_5 = 0;
+    int ship_1 = 0; 
+    int ship_2 = 0; 
+    int ship_3 = 0;
+    int ship_4 = 0; 
+    int ship_5 = 0;
 
     for (int i = 0; i < board->width; i++) {
         for (int j = 0; j < board->height; j++) {
