@@ -831,10 +831,10 @@ int main() {
         int row, column;
         char space;
 
-        //If Player 1 Lost
+        //If Player 1 Lost and Player 2 Won
         if(ships_left(p1_board, p1_board->width, p1_board->height) == 0) {
-            send(p1_conn_fd, "H 1", 3, 0);
-            send(p2_conn_fd, "H 0", 3, 0);
+            send(p1_conn_fd, "H 0", 3, 0);
+            send(p2_conn_fd, "H 1", 3, 0);
             close(p1_conn_fd);
             close(p2_conn_fd);
             close(p1_listen_fd);
@@ -882,13 +882,110 @@ int main() {
 
             if (shooted == 300) {
                 send(p1_conn_fd, "E 401", 5, 0); //Cell already guessed
+                continue;
             }
 
+            char ships_remaining = ships_left(p2_board, p2_board->width, p2_board->height) + '0'; //convert to char 
 
+            //Hit or Miss
+            char shot_response[5];
+            shot_response[0] = 'R';
+            shot_response[1] = ' ';
+            shot_response[2] = ships_remaining;
+            shot_response[3] = ' ';
+
+            //Hit
+            if (shooted == 100) {
+                shot_response[4] = 'H';
+            }
+            //Miss
+            else if (shooted == 200) {
+                shot_response[4] = 'M';
+            }
+            send(p1_conn_fd, shot_response, 5, 0);
         }
-        
-        
+    }
 
+    //Player 2 Shoot and Query
+    while (1) {
+        memset(p2_buffer, 0, BUFFER_SIZE);
+        int p2_nbytes = read(p2_conn_fd, p2_buffer, BUFFER_SIZE);
+        int row, column;
+        char space;
+
+        //If Player 2 Lost and Player 1 Won
+        if(ships_left(p2_board, p2_board->width, p2_board->height) == 0) {
+            send(p1_conn_fd, "H 1", 3, 0);
+            send(p2_conn_fd, "H 0", 3, 0);
+            close(p1_conn_fd);
+            close(p2_conn_fd);
+            close(p1_listen_fd);
+            close(p2_listen_fd);
+            break;
+        }
+
+        if (p2_nbytes <= 0) {
+            perror("[Server] read() failed for Player 1.");
+            exit(EXIT_FAILURE);
+        }
+
+        //Forfeit
+        if (strcmp(p2_buffer, "F") == 0) {
+            printf("[Server] Player 2 forfeited\n");
+            send(p1_conn_fd, "H 1", 3, 0); //Halt
+            send(p2_conn_fd, "H 0", 3, 0); //Halt
+            close(p1_conn_fd);
+            close(p2_conn_fd);
+            close(p1_listen_fd);
+            close(p2_listen_fd);
+            return 0;
+        }
+
+        if(p2_buffer[0] != 'S' || p2_buffer[0] != 'Q') {
+            send(p1_conn_fd, "E 102", 5, 0);
+        }
+        else if (p1_buffer[0] == 'Q'){ 
+            char* history = query(p2_board, p2_board->width, p2_board->height);
+            send(p2_conn_fd, history, strlen(history), 0);
+            free(history);
+            continue;
+        }
+        else if (p2_buffer[0] == 'S') {
+            if (sscanf(p2_buffer, "S %d %d %c", &row, &column, &space) != 2) {
+                send(p2_conn_fd, "E 202", 5, 0);
+                continue;
+            }
+            if (row < 0 || row >= p2_board->height || column < 0 || column >= p2_board->width) {
+                send(p1_conn_fd, "E 400", 5, 0); //Shot outside board
+                continue;
+            }
+
+            int shooted = shoot(p1_board, row, column);
+
+            if (shooted == 300) {
+                send(p2_conn_fd, "E 401", 5, 0); //Cell already guessed
+                continue;
+            }
+
+            char ships_remaining = ships_left(p1_board, p1_board->width, p1_board->height) + '0'; //convert to char 
+            
+            //Hit or Miss
+            char shot_response[5];
+            shot_response[0] = 'R';
+            shot_response[1] = ' ';
+            shot_response[2] = ships_remaining;
+            shot_response[3] = ' ';
+
+            //Hit
+            if (shooted == 100) {
+                shot_response[4] = 'H';
+            }
+            //Miss
+            else if (shooted == 200) {
+                shot_response[4] = 'M';
+            }
+            send(p2_conn_fd, shot_response, 5, 0);
+        }
     }
 
     printf("[Server] Shutting down.\n");
