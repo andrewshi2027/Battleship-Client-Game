@@ -75,11 +75,13 @@ int initialize(Board *board, char* buffer, int width, int height) {
     while (sscanf(&buffer[buffer_index], "%d%n", &pieces[pieces_index], &space) == 1) {
         pieces_index++;
         buffer_index += space; 
-        if (pieces_index >= 20) {break;}
+        if (pieces_index >= 20) {
+            return 201;
+            break;
+        }
     }
 
     if (pieces_index < 20) {
-        printf("Error");
         return 201;
     }
     // Print Buffer
@@ -587,7 +589,7 @@ int main() {
         memset(p2_buffer, 0, BUFFER_SIZE);
         int width, height;
         char space; 
-        
+
         int p1_nbytes = read(p1_conn_fd, p1_buffer, BUFFER_SIZE);
 
         if (p1_nbytes <= 0) {
@@ -686,10 +688,28 @@ int main() {
             return 0;
         }
 
+        // int pieces_index = 0;
+        // int space = 0;
+        // int pieces[20]; 
+        // int buffer_index = 2;
+    
+        // while (sscanf(&p1_buffer[buffer_index], "%d%n", &pieces[pieces_index], &space) == 1) {
+        //     pieces_index++;
+        //     buffer_index += space; 
+        //     if (pieces_index >= 20) {
+        //         send(p1_conn_fd, "E 201", 5, 0);
+        //         break;
+        //     }
+        // }
+
         if (p1_buffer[0] != 'I') {
             send(p1_conn_fd, "E 101", 5, 0);
             continue;
         }
+        // else if (pieces_index != 20) {
+        //     send(p1_conn_fd, "E 201", 5, 0);
+        //     continue;
+        // }
         else if (p1_buffer[0] == 'I') {
             printf("[Server] Player 1 Initializing\n");
             int error = initialize(p1_board, p1_buffer, p1_board->width, p1_board->height);
