@@ -508,12 +508,6 @@ int ships_left (Board *board, int width, int height) {
     }
 }
 
-//Query
-//Forfeit
-//Error
-//Halt
-//Acknowledgment
-
 int main() {
     int p1_listen_fd, p1_conn_fd, p2_listen_fd, p2_conn_fd;
     struct sockaddr_in p1_address, p2_address;
@@ -735,7 +729,9 @@ int main() {
     //Player 2 Initializing
     while (1) {
         memset(p2_buffer, 0, BUFFER_SIZE);
+
         int p2_nbytes = read(p2_conn_fd, p2_buffer, BUFFER_SIZE);
+
         //Forfeit
         if (strcmp(p2_buffer, "F") == 0) {
             printf("Player 2 Forfeited\n");
@@ -756,10 +752,10 @@ int main() {
             printf("[Server] Player 2 Initializing\n");
             int error = initialize(p2_board, p2_buffer, p2_board->width, p2_board->height);
             if (error == 300) {
-                send(p1_conn_fd, "E 300", 5, 0);
+                send(p2_conn_fd, "E 300", 5, 0);
             }
             else if (error == 301) {
-                send(p1_conn_fd, "E 301", 5, 0);
+                send(p2_conn_fd, "E 301", 5, 0);
             }
             else if (error == 302) {
                 send(p2_conn_fd, "E 302", 5, 0);
@@ -776,6 +772,17 @@ int main() {
             }
         }
     }
+
+    // //Player 1 Shoot
+    // while (1) {
+    //     memset(p1_buffer, 0, BUFFER_SIZE);
+    //     int p1_nbytes = read(p1_conn_fd, p1_buffer, BUFFER_SIZE);
+
+    //     if(ships_left(p1_board, p1_board->width, p1_board->height) == 0) {
+
+    //     }
+
+    // }
 
     printf("[Server] Shutting down.\n");
     close(p1_conn_fd);
