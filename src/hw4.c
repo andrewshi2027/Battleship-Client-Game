@@ -337,13 +337,13 @@ int initialize(Board *board, char* buffer, int width, int height) {
                     if (board->grid[piece_row][piece_column + 1] >= 1) {clear_board(board, width, height); overlap = 1;} 
                     board->grid[piece_row][piece_column + 1] = ship;
 
-                    if (!is_within_board(board, piece_row + 1, piece_column + 1)) {clear_board(board, width, height); return 302;} 
-                    if (board->grid[piece_row + 1][piece_column + 1] >= 1) {clear_board(board, width, height); overlap = 1;} 
-                    board->grid[piece_row + 1][piece_column + 1] = ship;
+                    if (!is_within_board(board, piece_row - 1, piece_column + 1)) {clear_board(board, width, height); return 302;} 
+                    if (board->grid[piece_row - 1][piece_column + 1] >= 1) {clear_board(board, width, height); overlap = 1;} 
+                    board->grid[piece_row - 1][piece_column + 1] = ship;
 
-                    if (!is_within_board(board, piece_row - 1, piece_column)) {clear_board(board, width, height); return 302;} 
-                    if (board->grid[piece_row - 1][piece_column] >= 1) {clear_board(board, width, height); overlap = 1;} 
-                    board->grid[piece_row - 1][piece_column] = ship;
+                    if (!is_within_board(board, piece_row + 1, piece_column)) {clear_board(board, width, height); return 302;} 
+                    if (board->grid[piece_row + 1][piece_column] >= 1) {clear_board(board, width, height); overlap = 1;} 
+                    board->grid[piece_row + 1][piece_column] = ship;
                 }
                 ship++;
                 break;
