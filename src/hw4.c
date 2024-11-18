@@ -104,7 +104,7 @@ int initialize(Board *board, char* buffer, int width, int height) {
 
         if (piece_type < 1 || piece_type > 7) {
             clear_board(board, width, height);
-            return -300;
+            return 300;
         }
     }
     for (int i = 0; i < pieces_index; i += 4) {
