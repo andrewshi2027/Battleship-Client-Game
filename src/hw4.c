@@ -780,6 +780,11 @@ int main() {
 
         int p1_nbytes = read(p1_conn_fd, p1_buffer, BUFFER_SIZE);
 
+        if (p1_nbytes <= 0) {
+            perror("[Server] read() failed for Player 1.");
+            exit(EXIT_FAILURE);
+        }
+
         //Forfeit
         if (strcmp(p1_buffer, "F") == 0) {
             printf("[Server] Player 1 forfeited\n");
@@ -832,6 +837,11 @@ int main() {
         memset(p2_buffer, 0, BUFFER_SIZE);
 
         int p2_nbytes = read(p2_conn_fd, p2_buffer, BUFFER_SIZE);
+
+        if (p2_nbytes <= 0) {
+            perror("[Server] read() failed for Player 2.");
+            exit(EXIT_FAILURE);
+        }
 
         //Forfeit
         if (strcmp(p2_buffer, "F") == 0) {
