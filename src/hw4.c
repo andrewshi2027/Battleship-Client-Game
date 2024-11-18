@@ -75,7 +75,6 @@ int is_within_board(Board *board, int row, int column) {
 //Place the Ship on the Board
 int initialize(Board *board, char* buffer, int width, int height) {
     int piece_type, piece_rotation, piece_column, piece_row;
-    int overlap_flag = 0;
 
     int pieces_index = 0;
     int space = 0;
@@ -139,19 +138,19 @@ int initialize(Board *board, char* buffer, int width, int height) {
             case 1: //Shape 1
                 if (piece_rotation == 1 || piece_rotation == 2 || piece_rotation == 3 || piece_rotation == 4) {
                     if (!is_within_board(board, piece_row, piece_column)) {clear_board(board, width, height); return 302;}
-                    if (board->grid[piece_row][piece_column] >= 1) {clear_board(board, width, height); overlap_flag = 1;}
+                    if (board->grid[piece_row][piece_column] >= 1) {clear_board(board, width, height);return 303;}
                     board->grid[piece_row][piece_column] = ship;
 
                     if (!is_within_board(board, piece_row, piece_column + 1)) {clear_board(board, width, height); return 302;}
-                    if (board->grid[piece_row][piece_column + 1] >= 1) {clear_board(board, width, height); overlap_flag = 1;}
+                    if (board->grid[piece_row][piece_column + 1] >= 1) {clear_board(board, width, height); return 303;}
                     board->grid[piece_row][piece_column + 1] = ship;
 
                     if (!is_within_board(board, piece_row + 1, piece_column)) {clear_board(board, width, height); return 302;}
-                    if (board->grid[piece_row + 1][piece_column] >= 1) {clear_board(board, width, height); overlap_flag = 1;}
+                    if (board->grid[piece_row + 1][piece_column] >= 1) {clear_board(board, width, height); return 303;}
                     board->grid[piece_row + 1][piece_column] = ship;
 
                     if (!is_within_board(board, piece_row + 1, piece_column + 1)) {clear_board(board, width, height); return 302;}
-                    if (board->grid[piece_row + 1][piece_column + 1] >= 1) {clear_board(board, width, height); overlap_flag = 1;}
+                    if (board->grid[piece_row + 1][piece_column + 1] >= 1) {clear_board(board, width, height); return 303;}
                     board->grid[piece_row + 1][piece_column + 1] = ship;
                 }
                 ship++;
@@ -160,37 +159,37 @@ int initialize(Board *board, char* buffer, int width, int height) {
             case 2: //Shape 2
                 if (piece_rotation == 1 || piece_rotation == 3) {
                     if (!is_within_board(board, piece_row, piece_column)) {clear_board(board, width, height); return 302;}
-                    if (board->grid[piece_row][piece_column] >= 1) {clear_board(board, width, height); overlap_flag = 1;}
+                    if (board->grid[piece_row][piece_column] >= 1) {clear_board(board, width, height); return 303;}
                     board->grid[piece_row][piece_column] = ship;
 
                     if (!is_within_board(board, piece_row + 1, piece_column)) {clear_board(board, width, height); return 302;}
-                    if (board->grid[piece_row + 1][piece_column] >= 1) {clear_board(board, width, height); overlap_flag = 1;}
+                    if (board->grid[piece_row + 1][piece_column] >= 1) {clear_board(board, width, height); return 303;}
                     board->grid[piece_row + 1][piece_column] = ship;
 
                     if (!is_within_board(board, piece_row + 2, piece_column)) {clear_board(board, width, height); return 302;}
-                    if (board->grid[piece_row + 2][piece_column] >= 1) {clear_board(board, width, height); overlap_flag = 1;}
+                    if (board->grid[piece_row + 2][piece_column] >= 1) {clear_board(board, width, height); return 303;}
                     board->grid[piece_row + 2][piece_column] = ship;
 
                     if (!is_within_board(board, piece_row + 3, piece_column)) {clear_board(board, width, height); return 302;}
-                    if (board->grid[piece_row + 3][piece_column] >= 1) {clear_board(board, width, height); overlap_flag = 1;}
+                    if (board->grid[piece_row + 3][piece_column] >= 1) {clear_board(board, width, height); return 303;}
                     board->grid[piece_row + 3][piece_column] = ship;
                 }
                 
                 else if (piece_rotation == 2 || piece_rotation == 4) {
                     if (!is_within_board(board, piece_row, piece_column)) {clear_board(board, width, height); return 302;}
-                    if (board->grid[piece_row][piece_column] >= 1) {clear_board(board, width, height); overlap_flag = 1;}
+                    if (board->grid[piece_row][piece_column] >= 1) {clear_board(board, width, height); return 303;}
                     board->grid[piece_row][piece_column] = ship;
 
                     if (!is_within_board(board, piece_row, piece_column + 1)) {clear_board(board, width, height); return 302;}
-                    if (board->grid[piece_row][piece_column + 1] >= 1) {clear_board(board, width, height); overlap_flag = 1;}
+                    if (board->grid[piece_row][piece_column + 1] >= 1) {clear_board(board, width, height); return 303;}
                     board->grid[piece_row][piece_column + 1] = ship;
 
                     if (!is_within_board(board, piece_row, piece_column + 2)) {clear_board(board, width, height); return 302;}
-                    if (board->grid[piece_row][piece_column + 2] >= 1) {clear_board(board, width, height); overlap_flag = 1;}
+                    if (board->grid[piece_row][piece_column + 2] >= 1) {clear_board(board, width, height); return 303;}
                     board->grid[piece_row][piece_column + 2] = ship;
 
                     if (!is_within_board(board, piece_row, piece_column + 3)) {clear_board(board, width, height); return 302;}
-                    if (board->grid[piece_row][piece_column + 3] >= 1) {clear_board(board, width, height); overlap_flag = 1;}
+                    if (board->grid[piece_row][piece_column + 3] >= 1) {clear_board(board, width, height); return 303;}
                     board->grid[piece_row][piece_column + 3] = ship;
                 }
                 ship++;
@@ -199,37 +198,37 @@ int initialize(Board *board, char* buffer, int width, int height) {
             case 3: //Shape 3
                 if (piece_rotation == 1 || piece_rotation == 3) {
                     if (!is_within_board(board, piece_row, piece_column)) {clear_board(board, width, height); return 302;}
-                    if (board->grid[piece_row][piece_column] >= 1) {clear_board(board, width, height); overlap_flag = 1;}
+                    if (board->grid[piece_row][piece_column] >= 1) {clear_board(board, width, height); return 303;}
                     board->grid[piece_row][piece_column] = ship;
 
                     if (!is_within_board(board, piece_row, piece_column + 1)) {clear_board(board, width, height); return 302;}
-                    if (board->grid[piece_row][piece_column + 1] >= 1) {clear_board(board, width, height); overlap_flag = 1;}
+                    if (board->grid[piece_row][piece_column + 1] >= 1) {clear_board(board, width, height); return 303;}
                     board->grid[piece_row][piece_column + 1] = ship;
 
                     if (!is_within_board(board, piece_row - 1, piece_column + 1)) {clear_board(board, width, height); return 302;}
-                    if (board->grid[piece_row - 1][piece_column + 1] >= 1) {clear_board(board, width, height); overlap_flag = 1;}
+                    if (board->grid[piece_row - 1][piece_column + 1] >= 1) {clear_board(board, width, height); return 303;}
                     board->grid[piece_row - 1][piece_column + 1] = ship;
 
                     if (!is_within_board(board, piece_row - 1, piece_column + 2)) {clear_board(board, width, height); return 302;}
-                    if (board->grid[piece_row - 1][piece_column + 2] >= 1) {clear_board(board, width, height); overlap_flag = 1;}
+                    if (board->grid[piece_row - 1][piece_column + 2] >= 1) {clear_board(board, width, height); return 303;}
                     board->grid[piece_row - 1][piece_column + 2] = ship;
                 }
                 
                 else if (piece_rotation == 2 || piece_rotation == 4) {
                     if (!is_within_board(board, piece_row, piece_column)) {clear_board(board, width, height); return 302;}
-                    if (board->grid[piece_row][piece_column] >= 1) {clear_board(board, width, height); overlap_flag = 1;}
+                    if (board->grid[piece_row][piece_column] >= 1) {clear_board(board, width, height); return 303;}
                     board->grid[piece_row][piece_column] = ship;
 
                     if (!is_within_board(board, piece_row + 1, piece_column)) {clear_board(board, width, height); return 302;}
-                    if (board->grid[piece_row + 1][piece_column] >= 1) {clear_board(board, width, height); overlap_flag = 1;}
+                    if (board->grid[piece_row + 1][piece_column] >= 1) {clear_board(board, width, height); return 303;}
                     board->grid[piece_row + 1][piece_column] = ship;
 
                     if (!is_within_board(board, piece_row + 1, piece_column + 1)) {clear_board(board, width, height); return 302;}
-                    if (board->grid[piece_row + 1][piece_column + 1] >= 1) {clear_board(board, width, height); overlap_flag = 1;}
+                    if (board->grid[piece_row + 1][piece_column + 1] >= 1) {clear_board(board, width, height); return 303;}
                     board->grid[piece_row + 1][piece_column + 1] = ship;
 
                     if (!is_within_board(board, piece_row + 2, piece_column + 1)) {clear_board(board, width, height); return 302;}
-                    if (board->grid[piece_row + 2][piece_column + 1] >= 1) {clear_board(board, width, height); overlap_flag = 1;}
+                    if (board->grid[piece_row + 2][piece_column + 1] >= 1) {clear_board(board, width, height); return 303;}
                     board->grid[piece_row + 2][piece_column + 1] = ship;
                 }
                 ship++;
@@ -238,73 +237,73 @@ int initialize(Board *board, char* buffer, int width, int height) {
             case 4: //Shape 4
                 if (piece_rotation == 1) {
                     if (!is_within_board(board, piece_row, piece_column)) {clear_board(board, width, height); return 302;}
-                    if (board->grid[piece_row][piece_column] >= 1) {clear_board(board, width, height); overlap_flag = 1;}
+                    if (board->grid[piece_row][piece_column] >= 1) {clear_board(board, width, height); return 303;}
                     board->grid[piece_row][piece_column] = ship;
 
                     if (!is_within_board(board, piece_row + 1, piece_column)) {clear_board(board, width, height); return 302;}
-                    if (board->grid[piece_row + 1][piece_column] >= 1) {clear_board(board, width, height); overlap_flag = 1;}
+                    if (board->grid[piece_row + 1][piece_column] >= 1) {clear_board(board, width, height); return 303;}
                     board->grid[piece_row + 1][piece_column] = ship;
 
                     if (!is_within_board(board, piece_row + 2, piece_column)) {clear_board(board, width, height); return 302;}
-                    if (board->grid[piece_row + 2][piece_column] >= 1) {clear_board(board, width, height); overlap_flag = 1;}
+                    if (board->grid[piece_row + 2][piece_column] >= 1) {clear_board(board, width, height); return 303;}
                     board->grid[piece_row + 2][piece_column] = ship;
 
                     if (!is_within_board(board, piece_row + 2, piece_column + 1)) {clear_board(board, width, height); return 302;}
-                    if (board->grid[piece_row + 2][piece_column + 1] >= 1) {clear_board(board, width, height); overlap_flag = 1;}
+                    if (board->grid[piece_row + 2][piece_column + 1] >= 1) {clear_board(board, width, height); return 303;}
                     board->grid[piece_row + 2][piece_column + 1] = ship;
                 }
 
                 else if (piece_rotation == 2) {
                     if (!is_within_board(board, piece_row, piece_column)) {clear_board(board, width, height); return 302;}
-                    if (board->grid[piece_row][piece_column] >= 1) {clear_board(board, width, height); overlap_flag = 1;}
+                    if (board->grid[piece_row][piece_column] >= 1) {clear_board(board, width, height); return 303;}
                     board->grid[piece_row][piece_column] = ship;
 
                     if (!is_within_board(board, piece_row, piece_column + 1)) {clear_board(board, width, height); return 302;}
-                    if (board->grid[piece_row][piece_column + 1] >= 1) {clear_board(board, width, height); overlap_flag = 1;}
+                    if (board->grid[piece_row][piece_column + 1] >= 1) {clear_board(board, width, height); return 303;}
                     board->grid[piece_row][piece_column + 1] = ship;
 
                     if (!is_within_board(board, piece_row, piece_column + 2)) {clear_board(board, width, height); return 302;}
-                    if (board->grid[piece_row][piece_column + 2] >= 1) {clear_board(board, width, height); overlap_flag = 1;}
+                    if (board->grid[piece_row][piece_column + 2] >= 1) {clear_board(board, width, height); return 303;}
                     board->grid[piece_row][piece_column + 2] = ship;
 
                     if (!is_within_board(board, piece_row + 1, piece_column)) {clear_board(board, width, height); return 302;}
-                    if (board->grid[piece_row + 1][piece_column] >= 1) {clear_board(board, width, height); overlap_flag = 1;}
+                    if (board->grid[piece_row + 1][piece_column] >= 1) {clear_board(board, width, height); return 303;}
                     board->grid[piece_row + 1][piece_column] = ship;
                 }
 
                 else if (piece_rotation == 3) {
                     if (!is_within_board(board, piece_row, piece_column)) {clear_board(board, width, height); return 302;}
-                    if (board->grid[piece_row][piece_column] >= 1) {clear_board(board, width, height); overlap_flag = 1;}
+                    if (board->grid[piece_row][piece_column] >= 1) {clear_board(board, width, height); return 303;}
                     board->grid[piece_row][piece_column] = ship;
 
                     if (!is_within_board(board, piece_row, piece_column + 1)) {clear_board(board, width, height); return 302;}
-                    if (board->grid[piece_row][piece_column + 1] >= 1) {clear_board(board, width, height); overlap_flag = 1;}
+                    if (board->grid[piece_row][piece_column + 1] >= 1) {clear_board(board, width, height); return 303;}
                     board->grid[piece_row][piece_column + 1] = ship;
 
                     if (!is_within_board(board, piece_row + 1, piece_column + 1)) {clear_board(board, width, height); return 302;}
-                    if (board->grid[piece_row + 1][piece_column + 1] >= 1) {clear_board(board, width, height); overlap_flag = 1;}
+                    if (board->grid[piece_row + 1][piece_column + 1] >= 1) {clear_board(board, width, height); return 303;}
                     board->grid[piece_row + 1][piece_column + 1] = ship;
 
                     if (!is_within_board(board, piece_row + 2, piece_column + 1)) {clear_board(board, width, height); return 302;}
-                    if (board->grid[piece_row + 2][piece_column + 1] >= 1) {clear_board(board, width, height); overlap_flag = 1;}
+                    if (board->grid[piece_row + 2][piece_column + 1] >= 1) {clear_board(board, width, height); return 303;}
                     board->grid[piece_row + 2][piece_column + 1] = ship;
                 }
 
                 else if (piece_rotation == 4) {
                     if (!is_within_board(board, piece_row, piece_column)) {clear_board(board, width, height); return 302;} 
-                    if (board->grid[piece_row][piece_column] >= 1) {clear_board(board, width, height); overlap_flag = 1;} 
+                    if (board->grid[piece_row][piece_column] >= 1) {clear_board(board, width, height); return 303;} 
                     board->grid[piece_row][piece_column] = ship;
 
                     if (!is_within_board(board, piece_row, piece_column + 1)) {clear_board(board, width, height); return 302;} 
-                    if (board->grid[piece_row][piece_column + 1] >= 1) {clear_board(board, width, height); overlap_flag = 1;} 
+                    if (board->grid[piece_row][piece_column + 1] >= 1) {clear_board(board, width, height); return 303;} 
                     board->grid[piece_row][piece_column + 1] = ship;
 
                     if (!is_within_board(board, piece_row, piece_column + 2)) {clear_board(board, width, height); return 302;} 
-                    if (board->grid[piece_row][piece_column + 2] >= 1) {clear_board(board, width, height); overlap_flag = 1;} 
+                    if (board->grid[piece_row][piece_column + 2] >= 1) {clear_board(board, width, height); return 303;} 
                     board->grid[piece_row][piece_column + 2] = ship;
 
                     if (!is_within_board(board, piece_row - 1, piece_column + 2)) {clear_board(board, width, height); return 302;} 
-                    if (board->grid[piece_row - 1][piece_column + 2] >= 1) {clear_board(board, width, height); overlap_flag = 1;} 
+                    if (board->grid[piece_row - 1][piece_column + 2] >= 1) {clear_board(board, width, height); return 303;} 
                     board->grid[piece_row - 1][piece_column + 2] = ship;
                 }
                 ship++;
@@ -313,37 +312,37 @@ int initialize(Board *board, char* buffer, int width, int height) {
             case 5: //Shape 5
                 if (piece_rotation == 1 || piece_rotation == 3) {
                     if (!is_within_board(board, piece_row, piece_column)) {clear_board(board, width, height); return 302;} 
-                    if (board->grid[piece_row][piece_column] >= 1) {clear_board(board, width, height); overlap_flag = 1;} 
+                    if (board->grid[piece_row][piece_column] >= 1) {clear_board(board, width, height); return 303;} 
                     board->grid[piece_row][piece_column] = ship;
 
                     if (!is_within_board(board, piece_row, piece_column + 1)) {clear_board(board, width, height); return 302;} 
-                    if (board->grid[piece_row][piece_column + 1] >= 1) {clear_board(board, width, height); overlap_flag = 1;} 
+                    if (board->grid[piece_row][piece_column + 1] >= 1) {clear_board(board, width, height); return 303;} 
                     board->grid[piece_row][piece_column + 1] = ship;
 
                     if (!is_within_board(board, piece_row + 1, piece_column + 1)) {clear_board(board, width, height); return 302;} 
-                    if (board->grid[piece_row + 1][piece_column + 1] >= 1) {clear_board(board, width, height); overlap_flag = 1;} 
+                    if (board->grid[piece_row + 1][piece_column + 1] >= 1) {clear_board(board, width, height); return 303;} 
                     board->grid[piece_row + 1][piece_column + 1] = ship;
 
                     if (!is_within_board(board, piece_row + 1, piece_column + 2)) {clear_board(board, width, height); return 302;} 
-                    if (board->grid[piece_row + 1][piece_column + 2] >= 1) {clear_board(board, width, height); overlap_flag = 1;} 
+                    if (board->grid[piece_row + 1][piece_column + 2] >= 1) {clear_board(board, width, height); return 303;} 
                     board->grid[piece_row + 1][piece_column + 2] = ship;
                 }
                 
                 else if (piece_rotation == 2 || piece_rotation == 4) {
                     if (!is_within_board(board, piece_row, piece_column)) {clear_board(board, width, height); return 302;} 
-                    if (board->grid[piece_row][piece_column] >= 1) {clear_board(board, width, height); overlap_flag = 1;} 
+                    if (board->grid[piece_row][piece_column] >= 1) {clear_board(board, width, height); return 303;} 
                     board->grid[piece_row][piece_column] = ship;
 
                     if (!is_within_board(board, piece_row, piece_column + 1)) {clear_board(board, width, height); return 302;} 
-                    if (board->grid[piece_row][piece_column + 1] >= 1) {clear_board(board, width, height); overlap_flag = 1;} 
+                    if (board->grid[piece_row][piece_column + 1] >= 1) {clear_board(board, width, height); return 303;} 
                     board->grid[piece_row][piece_column + 1] = ship;
 
                     if (!is_within_board(board, piece_row + 1, piece_column + 1)) {clear_board(board, width, height); return 302;} 
-                    if (board->grid[piece_row + 1][piece_column + 1] >= 1) {clear_board(board, width, height); overlap_flag = 1;} 
+                    if (board->grid[piece_row + 1][piece_column + 1] >= 1) {clear_board(board, width, height); return 303;} 
                     board->grid[piece_row + 1][piece_column + 1] = ship;
 
                     if (!is_within_board(board, piece_row - 1, piece_column)) {clear_board(board, width, height); return 302;} 
-                    if (board->grid[piece_row - 1][piece_column] >= 1) {clear_board(board, width, height); overlap_flag = 1;} 
+                    if (board->grid[piece_row - 1][piece_column] >= 1) {clear_board(board, width, height); return 303;} 
                     board->grid[piece_row - 1][piece_column] = ship;
                 }
                 ship++;
@@ -352,73 +351,73 @@ int initialize(Board *board, char* buffer, int width, int height) {
             case 6: //Shape 6
                 if (piece_rotation == 1) {
                     if (!is_within_board(board, piece_row, piece_column)) {clear_board(board, width, height); return 302;} 
-                    if (board->grid[piece_row][piece_column] >= 1) {clear_board(board, width, height); overlap_flag = 1;} 
+                    if (board->grid[piece_row][piece_column] >= 1) {clear_board(board, width, height); return 303;} 
                     board->grid[piece_row][piece_column] = ship;
 
                     if (!is_within_board(board, piece_row, piece_column + 1)) {clear_board(board, width, height); return 302;} 
-                    if (board->grid[piece_row][piece_column + 1] >= 1) {clear_board(board, width, height); overlap_flag = 1;} 
+                    if (board->grid[piece_row][piece_column + 1] >= 1) {clear_board(board, width, height); return 303;} 
                     board->grid[piece_row][piece_column + 1] = ship;
 
                     if (!is_within_board(board, piece_row - 1, piece_column + 1)) {clear_board(board, width, height); return 302;} 
-                    if (board->grid[piece_row - 1][piece_column + 1] >= 1) {clear_board(board, width, height); overlap_flag = 1;} 
+                    if (board->grid[piece_row - 1][piece_column + 1] >= 1) {clear_board(board, width, height); return 303;} 
                     board->grid[piece_row - 1][piece_column + 1] = ship;
 
                     if (!is_within_board(board, piece_row - 2, piece_column + 1)) {clear_board(board, width, height); return 302;} 
-                    if (board->grid[piece_row - 2][piece_column + 1] >= 1) {clear_board(board, width, height); overlap_flag = 1;} 
+                    if (board->grid[piece_row - 2][piece_column + 1] >= 1) {clear_board(board, width, height); return 303;} 
                     board->grid[piece_row - 2][piece_column + 1] = ship;
                 }
 
                 else if (piece_rotation == 2) {
                     if (!is_within_board(board, piece_row, piece_column)) {clear_board(board, width, height); return 302;} 
-                    if (board->grid[piece_row][piece_column] >= 1) {clear_board(board, width, height); overlap_flag = 1;} 
+                    if (board->grid[piece_row][piece_column] >= 1) {clear_board(board, width, height); return 303;} 
                     board->grid[piece_row][piece_column] = ship;
 
                     if (!is_within_board(board, piece_row + 1, piece_column)) {clear_board(board, width, height); return 302;} 
-                    if (board->grid[piece_row + 1][piece_column] >= 1) {clear_board(board, width, height); overlap_flag = 1;} 
+                    if (board->grid[piece_row + 1][piece_column] >= 1) {clear_board(board, width, height); return 303;} 
                     board->grid[piece_row + 1][piece_column] = ship;
 
                     if (!is_within_board(board, piece_row + 1, piece_column + 1)) {clear_board(board, width, height); return 302;} 
-                    if (board->grid[piece_row + 1][piece_column + 1] >= 1) {clear_board(board, width, height); overlap_flag = 1;} 
+                    if (board->grid[piece_row + 1][piece_column + 1] >= 1) {clear_board(board, width, height); return 303;} 
                     board->grid[piece_row + 1][piece_column + 1] = ship;
 
                     if (!is_within_board(board, piece_row + 1, piece_column + 2)) {clear_board(board, width, height); return 302;} 
-                    if (board->grid[piece_row + 1][piece_column + 2] >= 1) {clear_board(board, width, height); overlap_flag = 1;} 
+                    if (board->grid[piece_row + 1][piece_column + 2] >= 1) {clear_board(board, width, height); return 303;} 
                     board->grid[piece_row + 1][piece_column + 2] = ship;
                 }
 
                 else if (piece_rotation == 3) {
                     if (is_within_board(board, piece_row, piece_column) == 0) {clear_board(board, width, height); return 302;} 
-                    if (board->grid[piece_row][piece_column] >= 1) {clear_board(board, width, height); overlap_flag = 1;} 
+                    if (board->grid[piece_row][piece_column] >= 1) {clear_board(board, width, height); return 303;} 
                     board->grid[piece_row][piece_column] = ship;
 
                     if (is_within_board(board, piece_row, piece_column + 1) == 0) {clear_board(board, width, height); return 302;} 
-                    if (board->grid[piece_row][piece_column + 1] >= 1) {clear_board(board, width, height); overlap_flag = 1;} 
+                    if (board->grid[piece_row][piece_column + 1] >= 1) {clear_board(board, width, height); return 303;} 
                     board->grid[piece_row][piece_column + 1] = ship;
 
                     if (is_within_board(board, piece_row + 1, piece_column) == 0) {clear_board(board, width, height); return 302;} 
-                    if (board->grid[piece_row + 1][piece_column] >= 1) {clear_board(board, width, height); overlap_flag = 1;} 
+                    if (board->grid[piece_row + 1][piece_column] >= 1) {clear_board(board, width, height); return 303;} 
                     board->grid[piece_row + 1][piece_column] = ship;
 
                     if (is_within_board(board, piece_row + 2, piece_column) == 0) {clear_board(board, width, height); return 302;} 
-                    if (board->grid[piece_row + 2][piece_column] >= 1) {clear_board(board, width, height); overlap_flag = 1;} 
+                    if (board->grid[piece_row + 2][piece_column] >= 1) {clear_board(board, width, height); return 303;} 
                     board->grid[piece_row + 2][piece_column] = ship;
                 }
 
                 else if (piece_rotation == 4) {
                     if (is_within_board(board, piece_row, piece_column) == 0) { clear_board(board, width, height); return 302; }
-                    if (board->grid[piece_row][piece_column] >= 1) {clear_board(board, width, height); overlap_flag = 1;}
+                    if (board->grid[piece_row][piece_column] >= 1) {clear_board(board, width, height); return 303; }
                     board->grid[piece_row][piece_column] = ship;
 
                     if (is_within_board(board, piece_row, piece_column + 1) == 0) { clear_board(board, width, height); return 302; }
-                    if (board->grid[piece_row][piece_column + 1] >= 1) {clear_board(board, width, height); overlap_flag = 1;}
+                    if (board->grid[piece_row][piece_column + 1] >= 1) {clear_board(board, width, height); return 303; }
                     board->grid[piece_row][piece_column + 1] = ship;
 
                     if (is_within_board(board, piece_row, piece_column + 2) == 0) { clear_board(board, width, height); return 302; }
-                    if (board->grid[piece_row][piece_column + 2] >= 1) {clear_board(board, width, height); overlap_flag = 1;}
+                    if (board->grid[piece_row][piece_column + 2] >= 1) {clear_board(board, width, height); return 303; }
                     board->grid[piece_row][piece_column + 2] = ship;
 
                     if (is_within_board(board, piece_row + 1, piece_column + 2) == 0) { clear_board(board, width, height); return 302; }
-                    if (board->grid[piece_row + 1][piece_column + 2] >= 1) {clear_board(board, width, height); overlap_flag = 1;}
+                    if (board->grid[piece_row + 1][piece_column + 2] >= 1) {clear_board(board, width, height); return 303; }
                     board->grid[piece_row + 1][piece_column + 2] = ship;
                 }
                 ship++;
@@ -427,82 +426,78 @@ int initialize(Board *board, char* buffer, int width, int height) {
             case 7: //Shape 7
                 if (piece_rotation == 1) {
                     if (is_within_board(board, piece_row, piece_column) == 0) { clear_board(board, width, height); return 302; }
-                    if (board->grid[piece_row][piece_column] >= 1) {clear_board(board, width, height); overlap_flag = 1;}
+                    if (board->grid[piece_row][piece_column] >= 1) {clear_board(board, width, height); return 303; }
                     board->grid[piece_row][piece_column] = ship;
 
                     if (is_within_board(board, piece_row, piece_column + 1) == 0) { clear_board(board, width, height); return 302; }
-                    if (board->grid[piece_row + 0][piece_column + 1] >= 1) {clear_board(board, width, height); overlap_flag = 1;}
+                    if (board->grid[piece_row + 0][piece_column + 1] >= 1) {clear_board(board, width, height); return 303; }
                     board->grid[piece_row + 0][piece_column + 1] = ship;
 
                     if (is_within_board(board, piece_row, piece_column + 2) == 0) { clear_board(board, width, height); return 302; }
-                    if (board->grid[piece_row + 0][piece_column + 2] >= 1) {clear_board(board, width, height); overlap_flag = 1;}
+                    if (board->grid[piece_row + 0][piece_column + 2] >= 1) {clear_board(board, width, height); return 303; }
                     board->grid[piece_row + 0][piece_column + 2] = ship;
 
                     if (is_within_board(board, piece_row + 1, piece_column + 1) == 0) { clear_board(board, width, height); return 302; }
-                    if (board->grid[piece_row + 1][piece_column + 1] >= 1) {clear_board(board, width, height); overlap_flag = 1;}
+                    if (board->grid[piece_row + 1][piece_column + 1] >= 1) {clear_board(board, width, height); return 303; }
                     board->grid[piece_row + 1][piece_column + 1] = ship;
                 }
 
                 else if (piece_rotation == 2) {
                     if (is_within_board(board, piece_row, piece_column) == 0) { clear_board(board, width, height); return 302; }
-                    if (board->grid[piece_row][piece_column] >= 1) {clear_board(board, width, height); overlap_flag = 1;}
+                    if (board->grid[piece_row][piece_column] >= 1) {clear_board(board, width, height); return 303; }
                     board->grid[piece_row][piece_column] = ship;
 
                     if (is_within_board(board, piece_row, piece_column + 1) == 0) { clear_board(board, width, height); return 302; }
-                    if (board->grid[piece_row][piece_column + 1] >= 1) {clear_board(board, width, height); overlap_flag = 1;}
+                    if (board->grid[piece_row][piece_column + 1] >= 1) {clear_board(board, width, height); return 303; }
                     board->grid[piece_row][piece_column + 1] = ship;
 
                     if (is_within_board(board, piece_row - 1, piece_column + 1) == 0) { clear_board(board, width, height); return 302; }
-                    if (board->grid[piece_row - 1][piece_column + 1] >= 1) {clear_board(board, width, height); overlap_flag = 1;}
+                    if (board->grid[piece_row - 1][piece_column + 1] >= 1) {clear_board(board, width, height); return 303; }
                     board->grid[piece_row - 1][piece_column + 1] = ship;
 
                     if (is_within_board(board, piece_row + 1, piece_column + 1) == 0) { clear_board(board, width, height); return 302; }
-                    if (board->grid[piece_row + 1][piece_column + 1] >= 1) {clear_board(board, width, height); overlap_flag = 1;}
+                    if (board->grid[piece_row + 1][piece_column + 1] >= 1) {clear_board(board, width, height); return 303; }
                     board->grid[piece_row + 1][piece_column + 1] = ship;
                 }
 
                 else if (piece_rotation == 3) {
                     if (is_within_board(board, piece_row, piece_column) == 0) { clear_board(board, width, height); return 302; }
-                    if (board->grid[piece_row][piece_column] >= 1) {clear_board(board, width, height); overlap_flag = 1;}
+                    if (board->grid[piece_row][piece_column] >= 1) {clear_board(board, width, height); return 303; }
                     board->grid[piece_row][piece_column] = ship;
 
                     if (is_within_board(board, piece_row, piece_column + 1) == 0) { clear_board(board, width, height); return 302; }
-                    if (board->grid[piece_row][piece_column + 1] >= 1) {clear_board(board, width, height); overlap_flag = 1;}
+                    if (board->grid[piece_row][piece_column + 1] >= 1) {clear_board(board, width, height); return 303; }
                     board->grid[piece_row][piece_column + 1] = ship;
 
                     if (is_within_board(board, piece_row, piece_column + 2) == 0) { clear_board(board, width, height); return 302; }
-                    if (board->grid[piece_row][piece_column + 2] >= 1) {clear_board(board, width, height); overlap_flag = 1;}
+                    if (board->grid[piece_row][piece_column + 2] >= 1) {clear_board(board, width, height); return 303; }
                     board->grid[piece_row][piece_column + 2] = ship;
 
                     if (is_within_board(board, piece_row - 1, piece_column + 1) == 0) { clear_board(board, width, height); return 302; }
-                    if (board->grid[piece_row - 1][piece_column + 1] >= 1) {clear_board(board, width, height); overlap_flag = 1;}
+                    if (board->grid[piece_row - 1][piece_column + 1] >= 1) {clear_board(board, width, height); return 303; }
                     board->grid[piece_row - 1][piece_column + 1] = ship;
                 }
 
                 else if (piece_rotation == 4) {
                     if (is_within_board(board, piece_row, piece_column) == 0) { clear_board(board, width, height); return 302; }
-                    if (board->grid[piece_row][piece_column] >= 1) {clear_board(board, width, height); overlap_flag = 1;}
+                    if (board->grid[piece_row][piece_column] >= 1) {clear_board(board, width, height); return 303; }
                     board->grid[piece_row][piece_column] = ship;
 
                     if (is_within_board(board, piece_row + 1, piece_column) == 0) { clear_board(board, width, height); return 302; }
-                    if (board->grid[piece_row + 1][piece_column] >= 1) {clear_board(board, width, height); overlap_flag = 1;}
+                    if (board->grid[piece_row + 1][piece_column] >= 1) {clear_board(board, width, height); return 303; }
                     board->grid[piece_row + 1][piece_column] = ship;
 
                     if (is_within_board(board, piece_row + 2, piece_column) == 0) { clear_board(board, width, height); return 302; }
-                    if (board->grid[piece_row + 2][piece_column] >= 1) {clear_board(board, width, height); overlap_flag = 1;}
+                    if (board->grid[piece_row + 2][piece_column] >= 1) {clear_board(board, width, height); return 303; }
                     board->grid[piece_row + 2][piece_column] = ship;
 
                     if (is_within_board(board, piece_row + 1, piece_column + 1) == 0) { clear_board(board, width, height); return 302; }
-                    if (board->grid[piece_row + 1][piece_column + 1] >= 1) {clear_board(board, width, height); overlap_flag = 1;}
+                    if (board->grid[piece_row + 1][piece_column + 1] >= 1) {clear_board(board, width, height); return 303; }
                     board->grid[piece_row + 1][piece_column + 1] = ship;
                 }
                 ship++;
                 break;
         }
-        
-    }
-    if (overlap_flag = 1) {
-            return 303;
     }
     display_board(board, width, height);
     printf("\n");
