@@ -104,7 +104,7 @@ int initialize(Board *board, char* buffer, int width, int height) {
 
         if (piece_type < 1 || piece_type > 7) {
             clear_board(board, width, height);
-            return 300;
+            return -300;
         }
     }
     for (int i = 0; i < pieces_index; i += 4) {
@@ -507,18 +507,18 @@ int initialize(Board *board, char* buffer, int width, int height) {
 int shoot(Board *board, int row, int column) {
     //Hit
     if (board->grid[row][column] == 1 || board->grid[row][column] == 2 ||board->grid[row][column] == 3 || board->grid[row][column] == 4 || board->grid[row][column] == 5) {
-        board->grid[row][column] = 100;
-        return 100;
+        board->grid[row][column] = -100;
+        return -100;
     }
     //Miss
     else if (board->grid[row][column] == 0) {
-        board->grid[row][column] = 200;
-        return 200;
+        board->grid[row][column] = -200;
+        return -200;
     }
     //Already Guessed Cell
-    else if (board->grid[row][column] == 100 || board->grid[row][column] == 200) {
-        board->grid[row][column] = 300;
-        return 300;
+    else if (board->grid[row][column] == -100 || board->grid[row][column] == -200) {
+        board->grid[row][column] = -300;
+        return -300;
     }
 }
 
@@ -558,7 +558,7 @@ char* query (Board *board, int width, int height) {
 
     for (int i = 0; i < height; i++) {
         for (int j = 0; j < width; j++) {
-            if (board->grid[i][j] == 100 || board->grid[i][j] == 200) {
+            if (board->grid[i][j] == -100 || board->grid[i][j] == -200) {
                 hits_misses += 6; //Add space for each " H x y" or " M x y"
             }
         }
@@ -581,14 +581,14 @@ char* query (Board *board, int width, int height) {
     for (int i = 0; i < height; i++) {
         for (int j = 0; j < width; j++) {
             //Hit or Miss
-            if (board->grid[i][j] == 100 || board->grid[i][j] == 200) {
+            if (board->grid[i][j] == -100 || board->grid[i][j] == -200) {
                 history[history_index++] = ' ';
                 //Hit
-                if (board->grid[i][j] == 100) {
+                if (board->grid[i][j] == -100) {
                     history[history_index++] = 'H';
                 }
                 //Miss
-                else if (board->grid[i][j] == 200) {
+                else if (board->grid[i][j] == -200) {
                     history[history_index++] = 'M';
                 }
                 history[history_index++] = ' ';
@@ -935,7 +935,7 @@ int main() {
                 display_board(p2_board, p2_board->width, p2_board->height);
                 printf("\n");
 
-                if (shooted == 300) {
+                if (shooted == -300) {
                     send(p1_conn_fd, "E 401", 5, 0); //Cell already guessed
                     continue;
                 }
@@ -950,11 +950,11 @@ int main() {
                 shot_response[3] = ' ';
 
                 //Hit
-                if (shooted == 100) {
+                if (shooted == -100) {
                     shot_response[4] = 'H';
                 }
                 //Miss
-                else if (shooted == 200) {
+                else if (shooted == -200) {
                     shot_response[4] = 'M';
                 }
                 send(p1_conn_fd, shot_response, 5, 0);
@@ -1020,7 +1020,7 @@ int main() {
                 display_board(p1_board, p1_board->width, p1_board->height);
                 printf("\n");
 
-                if (shooted == 300) {
+                if (shooted == -300) {
                     send(p2_conn_fd, "E 401", 5, 0); //Cell already guessed
                     continue;
                 }
@@ -1035,11 +1035,11 @@ int main() {
                 shot_response[3] = ' ';
 
                 //Hit
-                if (shooted == 100) {
+                if (shooted == -100) {
                     shot_response[4] = 'H';
                 }
                 //Miss
-                else if (shooted == 200) {
+                else if (shooted == -200) {
                     shot_response[4] = 'M';
                 }
                 send(p2_conn_fd, shot_response, 5, 0);
