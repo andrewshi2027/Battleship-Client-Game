@@ -1053,8 +1053,18 @@ int main() {
     close(p1_listen_fd);
     close(p2_conn_fd);
     close(p2_listen_fd);
-    delete_board(p1_board);
-    delete_board(p2_board);
+    
+    for (int i = 0; i < p1_board->height; i++) {
+        free(p1_board->grid[i]);
+    }
+    free(p1_board->grid);
+    free(p1_board);
+
+    for (int j = 0; j < p2_board->height; j++) {
+        free(p2_board->grid[j]);
+    }
+    free(p2_board->grid);
+    free(p2_board);
 
     return EXIT_SUCCESS;
 }
