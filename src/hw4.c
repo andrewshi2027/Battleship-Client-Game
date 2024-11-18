@@ -137,21 +137,45 @@ int initialize(Board *board, char* buffer, int width, int height) {
         switch (piece_type) {
             case 1: //Shape 1
                 if (piece_rotation == 1 || piece_rotation == 2 || piece_rotation == 3 || piece_rotation == 4) {
-                    if (board->grid[piece_row][piece_column] == 1) {clear_board(board, width, height); return 303;} 
-                    if (is_within_board(board, piece_row, piece_column) == 1) {board->grid[piece_row][piece_column] = ship;} 
-                    else {clear_board(board, width, height); return 302;}
+                    if (!is_within_board(board, piece_row, piece_column)) {
+                        clear_board(board, width, height);
+                        return 302;
+                    }
+                    if (board->grid[piece_row][piece_column] == 1) {
+                        clear_board(board, width, height);
+                        return 303;
+                    }
+                    board->grid[piece_row][piece_column] = ship;
 
-                    if (board->grid[piece_row][piece_column + 1] == 1) {clear_board(board, width, height); return 303;} 
-                    if (is_within_board(board, piece_row + 0, piece_column + 1) == 1) {board->grid[piece_row + 0][piece_column + 1] = ship;}    
-                    else {clear_board(board, width, height); return 302;}
+                    if (!is_within_board(board, piece_row, piece_column + 1)) {
+                        clear_board(board, width, height);
+                        return 302;
+                    }
+                    if (board->grid[piece_row][piece_column + 1] == 1) {
+                        clear_board(board, width, height);
+                        return 303;
+                    }
+                    board->grid[piece_row][piece_column + 1] = ship;
 
-                    if (board->grid[piece_row + 1][piece_column + 0] == 1) {clear_board(board, width, height); return 303;} 
-                    if (is_within_board(board, piece_row + 1, piece_column + 0) == 1) {board->grid[piece_row + 1][piece_column + 0] = ship;}   
-                    else {clear_board(board, width, height); return 302;}
+                    if (!is_within_board(board, piece_row + 1, piece_column)) {
+                        clear_board(board, width, height);
+                        return 302;
+                    }
+                    if (board->grid[piece_row + 1][piece_column] == 1) {
+                        clear_board(board, width, height);
+                        return 303;
+                    }
+                    board->grid[piece_row + 1][piece_column] = ship;
 
-                    if (board->grid[piece_row + 1][piece_column + 1] == 1) {clear_board(board, width, height); return 303;} 
-                    if (is_within_board(board, piece_row + 1, piece_column + 1) == 1) {board->grid[piece_row + 1][piece_column + 1] = ship;}           
-                    else {clear_board(board, width, height); return 302;}
+                    if (!is_within_board(board, piece_row + 1, piece_column + 1)) {
+                        clear_board(board, width, height);
+                        return 302;
+                    }
+                    if (board->grid[piece_row + 1][piece_column + 1] == 1) {
+                        clear_board(board, width, height);
+                        return 303;
+                    }
+                    board->grid[piece_row + 1][piece_column + 1] = ship;
                 }
                 ship++;
                 break;
