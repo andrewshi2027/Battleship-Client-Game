@@ -75,6 +75,7 @@ int is_within_board(Board *board, int row, int column) {
 //Place the Ship on the Board
 int initialize(Board *board, char* buffer, int width, int height) {
     int piece_type, piece_rotation, piece_column, piece_row;
+    int overlap_flag = 0;
 
     int pieces_index = 0;
     int space = 0;
@@ -122,7 +123,6 @@ int initialize(Board *board, char* buffer, int width, int height) {
         int piece_rotation = pieces[i + 1];
         int piece_column = pieces[i + 2];
         int piece_row = pieces[i + 3];
-        int overlap_flag = 0;
 
 
         if (piece_type < 1 || piece_type > 7) {
@@ -507,9 +507,10 @@ int initialize(Board *board, char* buffer, int width, int height) {
                 ship++;
                 break;
         }
-        if (overlap_flag = 1) {
+        
+    }
+    if (overlap_flag = 1) {
             return 303;
-        }
     }
     display_board(board, width, height);
     printf("\n");
